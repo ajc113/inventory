@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @flavor %>
+
+<div>
+  <%= link_to "Edit this flavor", edit_flavor_path(@flavor) %> |
+  <%= link_to "Back to flavors", flavors_path %>
+
+  <%= button_to "Destroy this flavor", @flavor, method: :delete %>
+</div>
