@@ -3,6 +3,12 @@
 <%= render @flavor %>
 
 <div>
+
+<h1><%= @flavor.name %></h1>
+
+<p>Inventory Level: <%= @flavor.inventory %></p>
+
+
   <%= link_to "Edit this flavor", edit_flavor_path(@flavor) %> |
   <%= link_to "Back to flavors", flavors_path %>
 

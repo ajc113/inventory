@@ -2,13 +2,36 @@
 
 <h1>Flavors</h1>
 
-<div id="flavors">
-  <% @flavors.each do |flavor| %>
-    <%= render flavor %>
-    <p>
-      <%= link_to "Show this flavor", flavor %>
-    </p>
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Inventory Level</th> <!-- New column header -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @flavors.each do |flavor| %>
+      <tr>
+        <td><%= flavor.name %></td>
+        <td><%= flavor.inventory %></td> <!-- New cell to display inventory level -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to "New flavor", new_flavor_path %>
+
+
+
+
+<!-- scaffold
+<div id="flavors">
+  <%# @flavors.each do |flavor| %>
+    <%#= render flavor %>
+    <%#= flavor.inventory %>
+    <p>
+      <%#= link_to "Show this flavor", flavor %>
+    </p>
+  <%# end %>
+</div> -->
+
+<%#= link_to "New flavor", new_flavor_path %>

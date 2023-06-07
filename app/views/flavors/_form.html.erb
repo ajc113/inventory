@@ -1,4 +1,6 @@
 <%= form_with(model: flavor) do |form| %>
+  <%= form.number_field :inventory, class: 'form-control' %>
+
   <% if flavor.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(flavor.errors.count, "error") %> prohibited this flavor from being saved:</h2>
@@ -10,6 +12,9 @@
       </ul>
     </div>
   <% end %>
+
+<%= form.collection_select :location_id, Location.all, :id, :name, prompt: "Select Location" %>
+
 
   <div>
     <%= form.label :name, style: "display: block" %>

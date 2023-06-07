@@ -21,8 +21,9 @@ class FlavorsController < ApplicationController
 
   # POST /flavors or /flavors.json
   def create
-    @flavor = Flavor.new(flavor_params)
-
+  @flavor = Flavor.new(flavor_params)
+  @flavor.location_id = params[:flavor][:location_id]
+  @flavor.inventory = params[:flavor][:inventory]
     respond_to do |format|
       if @flavor.save
         format.html { redirect_to flavor_url(@flavor), notice: "Flavor was successfully created." }
@@ -36,6 +37,11 @@ class FlavorsController < ApplicationController
 
   # PATCH/PUT /flavors/1 or /flavors/1.json
   def update
+
+  @flavor = Flavor.find(params[:id])
+  @flavor.location_id = params[:flavor][:location_id]
+  @flavor.inventory = params[:flavor][:inventory]
+
     respond_to do |format|
       if @flavor.update(flavor_params)
         format.html { redirect_to flavor_url(@flavor), notice: "Flavor was successfully updated." }
@@ -65,6 +71,20 @@ class FlavorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def flavor_params
-      params.require(:flavor).permit(:name, :instock, :quantity)
+      params.require(:flavor).permit(:name, :instock, :quantity, :location_id, :inventory)
     end
+    def increase_inventory
+  @flavor = Flavor.find(params[:id])
+  @flavor.inventory += 1
+  @flavor.save
+  redirect_to @flavor
+end
+
+def decrease_inventory
+  @flavor = Flavor.find(params[:id])
+  @flavor.inventory -= 1 unless @flavor.inventory.zero?
+  @flavor.save
+  redirect_to @flavor
+end
+
 end
