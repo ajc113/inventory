@@ -1,5 +1,6 @@
 class FlavorsController < ApplicationController
-  before_action :set_flavor, only: %i[ show edit update destroy ]
+ before_action :set_flavor, only: [:show, :edit, :update, :destroy]
+
 
   # GET /flavors or /flavors.json
   def index
@@ -22,7 +23,7 @@ class FlavorsController < ApplicationController
   # POST /flavors or /flavors.json
   def create
   @flavor = Flavor.new(flavor_params)
-  @flavor.location_id = params[:flavor][:location_id]
+
   @flavor.inventory = params[:flavor][:inventory]
     respond_to do |format|
       if @flavor.save
@@ -39,7 +40,7 @@ class FlavorsController < ApplicationController
   def update
 
   @flavor = Flavor.find(params[:id])
-  @flavor.location_id = params[:flavor][:location_id]
+
   @flavor.inventory = params[:flavor][:inventory]
 
     respond_to do |format|
@@ -51,6 +52,17 @@ class FlavorsController < ApplicationController
         format.json { render json: @flavor.errors, status: :unprocessable_entity }
       end
     end
+
+
+
+
+
+
+
+
+
+
+
   end
 
   # DELETE /flavors/1 or /flavors/1.json
@@ -71,20 +83,8 @@ class FlavorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def flavor_params
-      params.require(:flavor).permit(:name, :instock, :quantity, :location_id, :inventory)
+      params.require(:flavor).permit(:name, :instock, :quantity)
     end
-    def increase_inventory
-  @flavor = Flavor.find(params[:id])
-  @flavor.inventory += 1
-  @flavor.save
-  redirect_to @flavor
-end
 
-def decrease_inventory
-  @flavor = Flavor.find(params[:id])
-  @flavor.inventory -= 1 unless @flavor.inventory.zero?
-  @flavor.save
-  redirect_to @flavor
-end
 
 end
