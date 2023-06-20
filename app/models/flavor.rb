@@ -1,6 +1,5 @@
 class Flavor < ApplicationRecord
-  # Associations
-  #belongs_to :location
+has_many :location_flavors
 
 validates :name, uniqueness: true
 

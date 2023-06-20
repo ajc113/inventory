@@ -1,17 +1,48 @@
 class LocationFlavorsController < ApplicationController
-
-class LocationFlavorsController < ApplicationController
   before_action :set_location_flavor, only: [:edit, :update, :destroy]
 
-  # ...
+ 	def index
+ 	@instock_flavors = Flavor.where(instock: true)
+	@locations = Location.all
+	@location_flavors = LocationFlavor.includes(:flavor, :location)
+	end
 
-  def new
+	def increase_inventory_form
+	  puts "Location ID: #{params[:location_id]}"
+	  @location_flavors = LocationFlavor.includes(:flavor, :location)
+	  # @location = Location.find(params[:location_id])
+	end
+
+	def increase_inventory
+	  location_flavor_ids = location_flavor_params[:location_flavor_ids]
+		if location_flavor_ids.nil?
+		  # Handle the case when location_flavor_ids is nil
+		else
+		  location_flavor_ids.each_with_index do |location_flavor_id, index|
+		    # Process each location_flavor_id
+		  end
+
+	    location_flavor = LocationFlavor.find(location_flavor_id)
+	    increase_amount = location_flavor_params[:inventory_increases][index].to_i
+	    location_flavor.inventory += increase_amount
+	    location_flavor.save
+	  end
+
+	  redirect_to location_flavors_path, notice: 'Inventory increased successfully.'
+	end
+
+	def inventory_levels
+  		@instock_flavors = Flavor.where(instock: 'Yes')
+  		@locations = Location.all
+	end
+
+  	def new
     @location_flavor = LocationFlavor.new
     @flavors = Flavor.all
     @locations = Location.all
-  end
+  	end
 
-  def create
+  	def create
     @location_flavor = LocationFlavor.new(location_flavor_params)
     if @location_flavor.save
       redirect_to @location_flavor.location, notice: 'Location flavor created successfully.'
@@ -52,38 +83,12 @@ class LocationFlavorsController < ApplicationController
   end
 
   def location_flavor_params
-    params.require(:location_flavor).permit(:flavor_id, :location_id, :quantity)
+    params.require(:location_flavor).permit(:flavor_id, :location_id, :inventory)
   end
-end
-
-
-
-
-    
+    def location_flavor_inventory(flavor, location)
+    location_flavor = LocationFlavor.find_by(flavor: flavor, location: location)
+    location_flavor&.inventory || 0
   end
-
-  # DELETE /flavors/1 or /flavors/1.json
-  def destroy
-    @flavor.destroy
-
-    respond_to do |format|
-      format.html { redirect_to flavors_url, notice: "Flavor was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_flavor
-      @flavor = Flavor.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def flavor_params
-      params.require(:flavor).permit(:name, :instock, :quantity, :location_id, :inventory)
-    end
-
-
 end
 
 

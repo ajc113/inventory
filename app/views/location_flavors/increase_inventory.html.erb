@@ -1,0 +1,16 @@
+<h1>Increase Inventory</h1>
+
+<%= form_tag(location_flavors_increase_inventory_path, method: :post) do %>
+  <% @location_flavors.each do |location_flavor| %>
+    <div>
+      <h3>Flavor: <%= location_flavor.flavor.name %></h3>
+      <h4>Location: <%= location_flavor.location.name %></h4>
+      <p>Current Inventory: <%= location_flavor.inventory %></p>
+      <%= label_tag "increase_inventory_#{location_flavor.id}", 'Increase Inventory:' %>
+      <%= number_field_tag "increase_inventory[#{location_flavor.id}]", nil, min: 0 %>
+    </div>
+  <% end %>
+
+  <%= submit_tag 'Update Inventory' %>
+<% end %>
+  

@@ -1,3 +1,3 @@
 class Location < ApplicationRecord
-has_many :flavors, dependent: :nullify
+has_many :location_flavors
 end

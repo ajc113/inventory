@@ -1,0 +1,14 @@
+<h1>Edit Location Flavor</h1>
+
+<%= form_with(model: [@location, @location_flavor], url: location_location_flavor_path(@location, @location_flavor), method: :patch) do |form| %>
+  <%= form.label :flavor_id, 'Flavor' %>
+  <%= form.collection_select :flavor_id, Flavor.all, :id, :name %>
+
+  <%= form.label :quantity %>
+  <%= form.number_field :quantity %>
+
+  <%= form.label :inventory %>
+  <%= form.number_field :inventory %>
+
+  <%= form.submit 'Update Location Flavor' %>
+<% end %>
