@@ -1,13 +1,13 @@
 <h1>Add Ice Cream to Inventory</h1>
 
-<%= form_tag(location_flavors_increase_inventory_path, method: :post) do %>
+<%= form_tag(increase_inventory_location_flavors_path, method: :post) do %>
+  <%= hidden_field_tag :location_id, @location.id %>
   <% Flavor.where(instock: "Yes").each do |flavor| %>
     <div>
       <h2><%= flavor.name %></h2>
-      <%#= hidden_field_tag :location_id, @location.id %>
-      <%= hidden_field_tag "location_flavor[flavor_id]", flavor.id %>
+      <%= hidden_field_tag "location_flavor_ids[]", flavor.id %>
       <%= label_tag "inventory_increase_#{flavor.id}", "Increase Inventory" %>
-      <%= number_field_tag "location_flavor[inventory]", nil, min: 0 %>
+      <%= number_field_tag "inventory_increases[#{flavor.id}]", nil, min: 0 %>
     </div>
   <% end %>
 
@@ -15,7 +15,5 @@
 <% end %>
 
 <%= link_to 'Inventory Levels', location_flavors_inventory_levels_path %>
-
-
 
 

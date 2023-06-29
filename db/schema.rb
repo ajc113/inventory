@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_215108) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_25_202404) do
   create_table "flavors", force: :cascade do |t|
     t.string "name"
     t.string "instock"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_215108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "inventory"
+    t.index ["flavor_id", "location_id"], name: "index_location_flavors_on_flavor_id_and_location_id", unique: true
     t.index ["flavor_id"], name: "index_location_flavors_on_flavor_id"
     t.index ["location_id"], name: "index_location_flavors_on_location_id"
   end

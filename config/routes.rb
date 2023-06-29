@@ -1,29 +1,18 @@
 Rails.application.routes.draw do
-resources :locations
+  resources :locations
 
-  resources :flavors do
-    member do
-      patch 'increase_inventory'
-      patch 'decrease_inventory'
+  resources :flavors
+
+
+
+  resources :location_flavors do
+  collection do
+      get 'new_increase_inventory_form'
+      post 'increase_inventory'
+      get 'decrease_inventory'
+      patch 'update_inventory'
     end
   end
 
-  resources :location_flavors do
-    post :increase_inventory, on: :collection
-    get :increase_inventory_form, on: :collection
-  end
-
-
-post 'location_flavors/increase_inventory', to: 'location_flavors#increase_inventory', as: 'location_flavors_increase_inventory'
-
-get 'location_flavors/inventory_levels', to: 'location_flavors#inventory_levels', as: 'location_flavors_inventory_levels'
-
-
+  get 'location_flavors/inventory_levels', to: 'location_flavors#inventory_levels', as: 'location_flavors_inventory_levels'
 end
-
-
-
-
-
-
-  

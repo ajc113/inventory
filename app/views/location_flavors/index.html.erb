@@ -24,12 +24,11 @@
 
  
 
- <% @location_flavors.each do |location_flavor| %>
-  <p>Flavor: <%= location_flavor.flavor.name %></p>
-  <p>Location: <%= location_flavor.location.name %></p>
-  <p>Inventory: <%= location_flavor.inventory %></p>
-<% end %>
 
+
+
+
+<%= link_to 'Add Inventory', new_increase_inventory_form_location_flavors_path %>
 
 
 
