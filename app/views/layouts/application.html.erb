@@ -12,7 +12,13 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto mt-28 px-5 flex flex-col">
+      <% if flash[:notice].present? %>
+        <div class="notice">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>

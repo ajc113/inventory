@@ -1,0 +1,9 @@
+<%= form_with url: sessions_path, method: :post do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email, required: true, type: :email %>
+
+  <%= f.label :password %>
+  <%= f.text_field :password, required: true, type: :password %>
+
+  <%= f.submit %>
+<% end %>
