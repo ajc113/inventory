@@ -1,18 +1,10 @@
 Rails.application.routes.draw do
-  resources :locations
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :flavors
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
 
-
-
-  resources :location_flavors do
-  collection do
-      get 'new_increase_inventory_form'
-      post 'increase_inventory'
-      get 'decrease_inventory'
-      patch 'update_inventory'
-    end
-  end
-
-  get 'location_flavors/inventory_levels', to: 'location_flavors#inventory_levels', as: 'location_flavors_inventory_levels'
+  # Defines the root path route ("/")
+  # root "articles#index"
 end
