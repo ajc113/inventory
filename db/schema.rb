@@ -10,9 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_07_16_154128) do
+ActiveRecord::Schema[7.1].define(version: 2023_07_17_115149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "flavors", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "archived", default: false
+    t.integer "quantity", default: 0
+    t.integer "inventory", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "location_flavors", force: :cascade do |t|
+    t.integer "quantity", default: 0
+    t.integer "inventory", default: 0
+    t.bigint "flavor_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_id", "location_id"], name: "index_location_flavors_on_flavor_id_and_location_id", unique: true
+    t.index ["flavor_id"], name: "index_location_flavors_on_flavor_id"
+    t.index ["location_id"], name: "index_location_flavors_on_location_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
