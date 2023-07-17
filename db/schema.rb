@@ -16,7 +16,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_07_17_115149) do
 
   create_table "flavors", force: :cascade do |t|
     t.string "name", null: false
-    t.string "instock"
     t.boolean "archived", default: false
     t.integer "quantity", default: 0
     t.integer "inventory", default: 0
