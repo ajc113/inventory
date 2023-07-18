@@ -21,4 +21,10 @@ class Flavor < ApplicationRecord
 
     location_flavor ? location_flavor.inventory : 0
   end
+
+  def alerting_inventory?(location)
+    location_flavor = fetch_location_flavor(location)
+
+    location_flavor.inventory.to_i <= SystemConfiguration.first.alerting_quantity
+  end
 end

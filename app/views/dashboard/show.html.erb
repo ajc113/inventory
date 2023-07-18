@@ -22,7 +22,9 @@
                 <tr>
                   <td><%= flavor.name %></td>
                   <% @locations.each do |location| %>
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= flavor.location_inventory(location) %></td>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 <%= flavor.alerting_inventory?(location) ? 'bg-red-500' : '' %>">
+                      <%= flavor.location_inventory(location) %>
+                    </td>
                   <% end %>
                 </tr>
               <% end %>
