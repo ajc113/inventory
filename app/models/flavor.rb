@@ -25,6 +25,6 @@ class Flavor < ApplicationRecord
   def alerting_inventory?(location)
     location_flavor = fetch_location_flavor(location)
 
-    location_flavor.inventory.to_i <= SystemConfiguration.first.alerting_quantity
+    location_flavor.inventory.to_i <= system_configuration.alerting_quantity
   end
 end
