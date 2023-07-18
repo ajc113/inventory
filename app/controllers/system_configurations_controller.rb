@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SystemConfigurationsController < ApplicationController
+  before_action :authorize_user
+
   def show
     @system_configuration = SystemConfiguration.first_or_create
   end
@@ -23,5 +25,9 @@ class SystemConfigurationsController < ApplicationController
 
   def system_configuration_params
     params.require(:system_configuration).permit(:alerting_quantity)
+  end
+
+  def authorize_user
+    authorize SystemConfiguration.first_or_create
   end
 end

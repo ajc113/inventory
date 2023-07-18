@@ -11,7 +11,9 @@ class Flavor < ApplicationRecord
   default_scope -> { where(archived: true) }
 
   def fetch_location_flavor(location)
-    location_flavors.find_by(location:)
+    location_flavors.find do |location_flavor|
+      location_flavor.location_id == location.id
+    end
   end
 
   def location_inventory(location)
