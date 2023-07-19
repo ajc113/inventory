@@ -10,6 +10,10 @@ class Flavor < ApplicationRecord
 
   default_scope -> { where(archived: true) }
 
+  def self.order_by_name
+    order(name: :asc)
+  end
+
   def fetch_location_flavor(location)
     location_flavors.find do |location_flavor|
       location_flavor.location_id == location.id

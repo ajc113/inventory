@@ -1,4 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import 'sortablejs';
 
 export default class extends Controller {
 
