@@ -8,4 +8,13 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+admin_data = { email: 'admin@example.com', password: 'password', password_confirmation: 'password' }
+super_admin_data = { email: 'super_admin@example.com', password: 'password', password_confirmation: 'password' }
+
+User.create!(admin_data) unless User.find_by(email: admin_data[:email])
+
+super_admin = User.find_by(email: super_admin_data[:email]) || User.create!(super_admin_data)
+
+super_admin_role = Role.find_or_create_by!(name: 'super_admin')
+
+super_admin.add_role(:super_admin) unless super_admin.has_role?(:super_admin)
