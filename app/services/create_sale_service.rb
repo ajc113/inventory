@@ -10,19 +10,20 @@ class CreateSaleService < ApplicationService
 
   def call
     errors = []
-    sales = []
+    location_flavors = LocationFlavor.where(flavor_id: location.flavors.ids, location:)
 
     ActiveRecord::Base.transaction do
-      location.flavors.each do |flavor|
-        sales_flavor_quantity = quantity_params["#{flavor.id}_quantity"].to_i
-
-        location_flavor = flavor.location_flavors.find_by(location: location)
+      location_flavors.each do |location_flavor|
+        flavor_id = location_flavor.flavor_id
+        sales_flavor_quantity = quantity_params["#{flavor_id}_quantity"].to_i
 
         calculated_inventory = location_flavor.inventory - sales_flavor_quantity
-        location_flavor.update!(inventory: calculated_inventory)
+        location_flavor.inventory = calculated_inventory
 
-        sales << Sale.create!(location: location, flavor: flavor, quantity: sales_flavor_quantity)
+        create_sale_record(flavor_id, sales_flavor_quantity)
       end
+
+      location_flavors.each(&:save!)
     rescue StandardError => exception
       errors << exception
       raise ActiveRecord::Rollback
@@ -31,7 +32,7 @@ class CreateSaleService < ApplicationService
     if errors.empty?
       ServiceResponse.new(meta: { message: "Sales records saved successfully." })
     else
-      ServiceResponse.new(status: 422, meta: { message: "Something went wrong! error while saving sales data."})
+      ServiceResponse.new(status: 422, meta: { message: "Unable to save sales data! #{errors.join(',')}"})
     end
   end
 
@@ -39,5 +40,9 @@ class CreateSaleService < ApplicationService
 
   def quantity_params
     params.select { |key, value| key.end_with?("_quantity") }
+  end
+
+  def create_sale_record(flavor_id, quantity)
+    Sale.create!(location:, flavor_id:, quantity:)
   end
 end
