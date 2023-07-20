@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :sales
+  resources :locations
   resource :system_configuration, only: %i[show edit update]
 
   get "up" => "rails/health#show", as: :rails_health_check
