@@ -3,8 +3,9 @@
 class Flavor < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :archived, inclusion: { in: [true, false] }
-  validates :quantity, :inventory, numericality: { only_integer: true }
+  validates :quantity, :inventory, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  has_many :sales, dependent: :destroy
   has_many :location_flavors, dependent: :destroy
   has_many :locations, through: :location_flavors
 
