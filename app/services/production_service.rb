@@ -19,8 +19,6 @@ class ProductionService < ApplicationService
 
         errors << invalid_quantity_error(location_flavor) if flavor_quantity.negative?
 
-        next if flavor_quantity.negative?
-
         location_flavor.inventory = flavor_quantity
 
         create_production_record(flavor_id, flavor_quantity)
