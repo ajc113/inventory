@@ -1,4 +1,15 @@
 <div class="my-5 grid grid-cols-4 gap-2 text-left">
+  <% if @errors.present? %>
+    <div class="col-span-4 py-3 text-base border-b border-gray-200" style="color: red">
+      <h2><%= @errors.size %> prohibited these sales from being saved:</h2>
+
+      <ul>
+        <% @errors.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="col-span-2 py-3 text-base border-b border-gray-200">
     <h3 class="text-xl">Flavor Name</h3>
   </div>
@@ -11,7 +22,7 @@
         <%= form.label :flavor, flavor.name %>
       </div>
       <div class="col-span-2 py-3 border-b border-gray-200">
-        <%= form.number_field "#{flavor.id}_quantity", min: 0, value: 0, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
+        <%= form.number_field "#{flavor.id}_quantity", min: 0, value: params.dig("#{flavor.id}_quantity").to_i, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
       </div>
     <% end %>
     <%= form.hidden_field :location_id, value: @location.id %>
