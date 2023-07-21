@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationFlavor < ApplicationRecord
-  validates :quantity, :inventory, numericality: { only_integer: true }
+  validates :quantity, :inventory, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   belongs_to :flavor
   belongs_to :location
