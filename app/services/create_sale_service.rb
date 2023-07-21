@@ -10,7 +10,7 @@ class CreateSaleService < ApplicationService
 
   def call
     errors = []
-    location_flavors = LocationFlavor.where(flavor_id: location.flavors.ids, location:)
+    location_flavors = location.location_flavors
 
     ActiveRecord::Base.transaction do
       location_flavors.each do |location_flavor|
