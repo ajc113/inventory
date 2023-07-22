@@ -54,6 +54,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_07_22_040723) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "inventory", default: false
+  end
+
+  create_table "productions", force: :cascade do |t|
+    t.integer "quantity", null: false
+    t.bigint "flavor_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_id"], name: "index_productions_on_flavor_id"
+    t.index ["location_id"], name: "index_productions_on_location_id"
   end
 
   create_table "roles", force: :cascade do |t|

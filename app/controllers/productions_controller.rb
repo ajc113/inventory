@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-class SalesController < ApplicationController
+class ProductionsController < ApplicationController
   before_action :set_location_flavors
 
-  def new
-    @sale = Sale.new
-  end
+  def new; end
 
   def create
-    result = CreateSaleService.call(params, @location)
+    result = ProductionService.call(params, @location)
     @errors = result.meta[:message] unless result.valid?
 
     if result.valid?

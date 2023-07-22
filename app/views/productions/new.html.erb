@@ -1,7 +1,7 @@
 <div class="my-5 grid grid-cols-4 gap-2 text-left">
   <% if @errors.present? %>
     <div class="col-span-4 py-3 text-base border-b border-gray-200" style="color: red">
-      <h2><%= @errors.size %> prohibited these sales from being saved:</h2>
+      <h2><%= @errors.size %> prohibited these production from being saved:</h2>
 
       <ul>
         <% @errors.each do |error| %>
@@ -16,7 +16,7 @@
   <div class="col-span-2 py-3 border-b border-gray-200">
     <h3 class="text-xl">Quantity</h3>
   </div>
-  <%= form_with(url: sales_path, method: :post, class: "contents") do |form| %>
+  <%= form_with(url: productions_path, method: :post, class: "contents") do |form| %>
     <% @flavors.order_by_name.each do |flavor| %>
       <div class="col-span-2 py-3 text-base border-b border-gray-200">
         <%= form.label :flavor, flavor.name %>
