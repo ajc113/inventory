@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_07_22_055456) do
+ActiveRecord::Schema[7.1].define(version: 2023_07_22_114112) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_07_22_055456) do
     t.string "report_recipients", default: [], array: true
   end
 
+  create_table "transfer_requests", force: :cascade do |t|
+    t.integer "quantity", null: false
+    t.bigint "flavor_id", null: false
+    t.bigint "to_location_id", null: false
+    t.bigint "from_location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_id"], name: "index_transfer_requests_on_flavor_id"
+    t.index ["from_location_id"], name: "index_transfer_requests_on_from_location_id"
+    t.index ["to_location_id"], name: "index_transfer_requests_on_to_location_id"
+  end
+
   create_table "transfers", force: :cascade do |t|
     t.integer "quantity", null: false
     t.bigint "flavor_id", null: false
@@ -107,6 +119,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_07_22_055456) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "transfer_requests", "locations", column: "from_location_id"
+  add_foreign_key "transfer_requests", "locations", column: "to_location_id"
   add_foreign_key "transfers", "locations", column: "from_location_id"
   add_foreign_key "transfers", "locations", column: "to_location_id"
 end
