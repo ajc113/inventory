@@ -11,6 +11,6 @@ class Transfer < ApplicationRecord
   private
 
   def to_from_locations_type
-    errors.add(:base, :valid_location_type) if to_location.inventory || !from_location.inventory
+    errors.add(:base, :valid_location_type) if to_location.is_a?(Inventory) || from_location.is_a?(Store)
   end
 end

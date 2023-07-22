@@ -29,14 +29,14 @@
       <%= form.label :from_location_id %>
     </div>
     <div class="col-span-2 py-3">
-      <%= form.select :from_location_id, Location.inventories.map { |location| [location.name, location.id] }, { include_blank: "Select From Location" }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.select :from_location_id, Inventory.all.map { |location| [location.name, location.id] }, { include_blank: "Select From Location" }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="my-5 col-span-2 py-3 text-base">
       <%= form.label :to_location_id %>
     </div>
     <div class="col-span-2 py-3">
-      <%= form.select :to_location_id, Location.stores.map { |location| [location.name, location.id] }, { include_blank: "Select To Location " }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.select :to_location_id, Store.all.map { |location| [location.name, location.id] }, { include_blank: "Select To Location " }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="inline">
