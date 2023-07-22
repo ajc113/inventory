@@ -77,6 +77,23 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mandrillapp.com",
+    port: 587,
+    authentication: :plain,
+    user_name: Rails.application.credentials.mandrill_user_name,
+    password: Rails.application.credentials.mandrill_api_key,
+    domain: 'bhomemade.com'
+  }
+
+  # TODO: We will add credentials for production before deploying
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.asset_host = Rails.application.credentials.host
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.host }
+  config.mandrill_mailer.default_url_options = { host: Rails.application.credentials.host }
+  config.action_controller.default_url_options = { host: Rails.application.credentials.host }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -87,6 +104,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.credentials.content_path = "config/credentials/production.yml.enc"
+  config.credentials.key_path = "config/credentials/production.key"
+
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
@@ -94,4 +114,9 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+end
+
+MandrillMailer.configure do |config|
+  config.api_key = Rails.application.credentials.mandrill_api_key
+  config.deliver_later_queue_name = :default
 end
