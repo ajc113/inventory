@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :sales
   resources :locations
   resources :productions
+  resources :transfers
   resource :system_configuration, only: %i[show edit update]
 
   get "up" => "rails/health#show", as: :rails_health_check

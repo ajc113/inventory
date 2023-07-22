@@ -48,6 +48,7 @@
                 <% end %>
               </div>
             </div>
+            <%= link_to "Transfers", new_transfer_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             <%= link_to "Locations", locations_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             <%= link_to "System Configuration", system_configuration_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"  if current_user.has_role?(:super_admin) %>
             <%= link_to "Logout", sessions_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", data: { turbo_method: :delete } %>
