@@ -49,6 +49,7 @@ gem "pundit"
 
 gem "mandrill_mailer"
 
+gem "daemons"
 gem "delayed_job_active_record"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
