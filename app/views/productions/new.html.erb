@@ -17,12 +17,12 @@
     <h3 class="text-xl">Quantity</h3>
   </div>
   <%= form_with(url: productions_path, method: :post, class: "contents") do |form| %>
-    <% @flavors.each do |flavor| %>
+    <% @flavors.order_by_name.each do |flavor| %>
       <div class="col-span-2 py-3 text-base border-b border-gray-200">
         <%= form.label :flavor, flavor.name %>
       </div>
       <div class="col-span-2 py-3 border-b border-gray-200">
-        <%= form.number_field "#{flavor.id}_quantity", min: 0, value: params.dig("#{flavor.id}_quantity").presence || flavor.location_inventory(@location), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
+        <%= form.number_field "#{flavor.id}_quantity", min: 0, value: params.dig("#{flavor.id}_quantity").to_i, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
       </div>
     <% end %>
     <%= form.hidden_field :location_id, value: @location.id %>

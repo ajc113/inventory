@@ -21,6 +21,6 @@ class ProductionsController < ApplicationController
   def set_location_flavors
     @location = Location.find(params[:location_id])
 
-    @flavors = @location.flavors
+    @flavors = @location.flavors.includes(:location_flavors)
   end
 end
