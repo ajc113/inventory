@@ -1,0 +1,46 @@
+<div class="my-5 grid grid-cols-8 gap-2 text-left">
+  <%= form_with(model: @transfer, url: transfers_path, method: :post, class: "contents") do |form| %>
+    <% if @errors.present? %>
+      <div class="col-span-8 py-3 text-base border-b border-gray-200" style="color: red">
+        <h2><%= @errors.size %> prohibited these trnasfer record from being saved:</h2>
+
+        <ul>
+          <% @errors.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5 col-span-2 py-3 text-base">
+      <%= form.label :flavor_id %>
+    </div>
+    <div class="col-span-2 py-3">
+      <%= form.select :flavor_id, Flavor.order_by_name.map { |flavor| [flavor.name, flavor.id] }, { include_blank: "Select Flavor" }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+    <div class="my-5 col-span-2 py-3 text-base">
+      <%= form.label :quantity %>
+    </div>
+    <div class="col-span-2 py-3">
+      <%= form.number_field :quantity, min: 0, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5 col-span-2 py-3 text-base">
+      <%= form.label :from_location_id %>
+    </div>
+    <div class="col-span-2 py-3">
+      <%= form.select :from_location_id, Inventory.all.map { |location| [location.name, location.id] }, { include_blank: "Select From Location" }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5 col-span-2 py-3 text-base">
+      <%= form.label :to_location_id %>
+    </div>
+    <div class="col-span-2 py-3">
+      <%= form.select :to_location_id, Store.all.map { |location| [location.name, location.id] }, { include_blank: "Select To Location " }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="inline">
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

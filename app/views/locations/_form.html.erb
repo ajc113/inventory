@@ -1,4 +1,4 @@
-<%= form_with(model: location) do |form| %>
+<%= form_with(model: location.becomes(Location), url: url, method: :patch) do |form| %>
   <% if location.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
@@ -17,8 +17,8 @@
   </div>
 
   <div>
-    <%= form.label :inventory, style: "display: block" %>
-    <%= form.check_box :inventory %>
+    <%= form.label :type, style: "display: block" %>
+    <%= form.select :type, Location.types.keys, { include_blank: 'Select type' } %>
   </div>
 
   <div>

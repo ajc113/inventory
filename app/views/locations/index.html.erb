@@ -4,9 +4,9 @@
 
 <div id="locations">
   <% @locations.each do |location| %>
-    <%= render location %>
+    <%= render 'location', location: location %>
     <p>
-      <%= link_to "Show this location", location %>
+      <%= link_to "Show this location", location_path(location) %>
     </p>
   <% end %>
 </div>

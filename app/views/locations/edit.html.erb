@@ -1,10 +1,10 @@
 <h1>Editing location</h1>
 
-<%= render "form", location: @location %>
+<%= render "form", location: @location, url: location_path(@location), method: :patch %>
 
 <br>
 
 <div>
-  <%= link_to "Show this location", @location %> |
+  <%= link_to "Show this location", location_path(@location) %> |
   <%= link_to "Back to locations", locations_path %>
 </div>
