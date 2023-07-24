@@ -27,8 +27,9 @@
     <% end %>
     <%= form.hidden_field :location_id, value: @location.id %>
 
-    <div class="inline">
+    <div class="inline col-span-4 flex justify-between">
       <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= link_to 'Back to sales', sales_path(location_id: @location.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
 </div>

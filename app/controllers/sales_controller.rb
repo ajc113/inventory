@@ -3,6 +3,10 @@
 class SalesController < ApplicationController
   before_action :set_location_flavors
 
+  def index
+    @sales = @location.sales.order_by_date
+  end
+
   def new
     @sale = Sale.new
   end
