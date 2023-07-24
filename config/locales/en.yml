@@ -28,6 +28,11 @@
 #       enabled: "ON"
 
 en:
+  time:
+    formats:
+      date: "%d.%m.%Y"
+      datetime: "%d.%m.%Y - %I:%M %p"
+
   activerecord:
     errors:
       models:
