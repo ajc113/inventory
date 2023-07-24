@@ -15,10 +15,10 @@
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          <%= image_tag "logowhite", class: "h-12" %>
         </div>
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
+          <div class="flex space-x-4 mt-1">
             <%= link_to "Dashboard", dashboard_path, class: "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" %>
             <%= link_to "Users", users_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             <div class="relative ml-3">

@@ -1,27 +1,31 @@
-<%= form_with(model: system_configuration, url: system_configuration_path, method: :patch, class: "contents") do |form| %>
-  <% if system_configuration.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(system_configuration.errors.count, "error") %> prohibited this system_configuration from being saved:</h2>
+<div class="mx-auto md:w-2/3 w-full">
+  <h1>Editing system configuration</h1>
 
-      <ul>
-        <% system_configuration.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: system_configuration, url: system_configuration_path, method: :patch, class: "contents") do |form| %>
+    <% if system_configuration.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+        <h2><%= pluralize(system_configuration.errors.count, "error") %> prohibited this system_configuration from being saved:</h2>
+
+        <ul>
+          <% system_configuration.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.label :alerting_quantity %>
+      <%= form.text_field :alerting_quantity, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :report_recipients %>
+      <%= form.text_field :report_recipients, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="inline">
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label :alerting_quantity %>
-    <%= form.text_field :alerting_quantity, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :report_recipients %>
-    <%= form.text_field :report_recipients, multiple: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
+</div>

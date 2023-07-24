@@ -1,9 +1,8 @@
-<h1>New location</h1>
+<div class="flex justify-between">
+  <h1 class="text-xl">New location</h1>
+  <%= link_to "Back to locations", locations_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+</div>
 
 <%= render "form", location: @location, url: locations_path, method: :post %>
 
 <br>
-
-<div>
-  <%= link_to "Back to locations", locations_path %>
-</div>
