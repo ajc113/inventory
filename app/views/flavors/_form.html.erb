@@ -1,0 +1,39 @@
+<%= form_with(model: flavor, url: url, class: "contents") do |form| %>
+  <% if flavor.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(flavor.errors.count, "error") %> prohibited this flavor from being saved:</h2>
+
+      <ul>
+        <% flavor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="flex my-5">
+    <%= form.label :archived, class: 'mt-1' %>
+    <%= form.check_box :archived, class: " ml-4 mt-1 block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :store_location_id %>
+    <%= form.select :store_location_id, @stores.map { |store| [store.name, store.id] }, { include_blank: 'Select store location', required: true },
+        class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :inventory_location_id %>
+    <%= form.select :inventory_location_id, @inventories.map { |store| [store.name, store.id] }, { include_blank: 'Select inventory location', required: true },
+        class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

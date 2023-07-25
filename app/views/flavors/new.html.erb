@@ -1,0 +1,6 @@
+<div class="flex justify-between">
+  <h1 class="text-xl">New Flavor</h1>
+  <%= link_to "Back to locations", flavors_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+</div>
+
+<%= render "form", flavor: @flavor, url: flavors_path %>

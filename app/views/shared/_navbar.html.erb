@@ -32,6 +32,11 @@
                 class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             </div>
 
+            <div class="group">
+              <%= link_to "Flavors", flavors_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            </div>
+
             <div class="relative ml-3">
               <div class="group" data-action="click->nav-bar#toggleLocationDropdown click->nav-bar#activeLink">
                 <%= link_to "Sales", "javascript:void(0)", id: "sales-menu-button", "aria-expanded": "false", "aria-haspopup": "true",

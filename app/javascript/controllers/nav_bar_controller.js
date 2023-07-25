@@ -19,6 +19,8 @@ export default class extends Controller {
       document.getElementById('sales-menu-button').parentElement.classList.add('active-link');
     } else if (currentPath == '/productions') {
       document.getElementById('productions-menu-button').parentElement.classList.add('active-link');
+    }else if(currentPath == '/transfers') {
+      document.querySelector(`a[href="/transfers/new"]`).parentElement.classList.add('active-link');
     } else {
       document.querySelector(`a[href="${currentPath}"]`).parentElement.classList.add('active-link');
     }
