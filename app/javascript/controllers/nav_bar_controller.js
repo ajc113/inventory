@@ -10,6 +10,8 @@ export default class extends Controller {
       link.parentElement.classList.remove('active-link')
     });
 
+    if (currentPath == '/') { currentPath = '/dashboard' }
+
     document.querySelector(`a[href="${currentPath}"]`).parentElement.classList.add('active-link');
   }
 
