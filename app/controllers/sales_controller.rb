@@ -4,7 +4,7 @@ class SalesController < ApplicationController
   before_action :set_location_flavors
 
   def index
-    @sales = @location.sales.order_by_date
+    @sales = @location.sales.includes(:flavor, :location).order_by_date
   end
 
   def new
