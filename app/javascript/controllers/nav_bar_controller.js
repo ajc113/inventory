@@ -12,7 +12,13 @@ export default class extends Controller {
 
     if (currentPath == '/') { currentPath = '/dashboard' }
 
-    document.querySelector(`a[href="${currentPath}"]`).parentElement.classList.add('active-link');
+    if (currentPath == '/sales') {
+      document.getElementById('sales-menu-button').parentElement.classList.add('active-link');
+    } else if (currentPath == '/productions') {
+      document.getElementById('productions-menu-button').parentElement.classList.add('active-link');
+    } else {
+      document.querySelector(`a[href="${currentPath}"]`).parentElement.classList.add('active-link');
+    }
   }
 
   activeLink(event) {
