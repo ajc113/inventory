@@ -9,7 +9,7 @@ class Flavor < ApplicationRecord
   has_many :location_flavors, dependent: :destroy
   has_many :locations, through: :location_flavors
 
-  default_scope -> { where(archived: true) }
+  default_scope -> { where(archived: false) }
 
   def self.order_by_name
     order(name: :asc)

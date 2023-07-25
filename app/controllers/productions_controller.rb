@@ -3,6 +3,10 @@
 class ProductionsController < ApplicationController
   before_action :set_location_flavors
 
+  def index
+    @productions = @location.productions.includes(:flavor, :location).order_by_date
+  end
+
   def new; end
 
   def create

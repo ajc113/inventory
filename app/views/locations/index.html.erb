@@ -1,14 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Locations</h1>
-
-<div id="locations">
-  <% @locations.each do |location| %>
-    <%= render 'location', location: location %>
-    <p>
-      <%= link_to "Show this location", location_path(location) %>
-    </p>
-  <% end %>
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto flex justify-between items-center">
+      <h1 class="text-xl text-base font-semibold leading-6 text-gray-900">Users List</h1>
+      <%= link_to 'New location', new_location_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    </div>
+  </div>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <table class="min-w-full sortable divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Type</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <div id="locations">
+                <% @locations.each do |location| %>
+                  <%= render 'location', location: location %>
+                <% end %>
+              </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New location", new_location_path %>

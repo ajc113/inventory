@@ -13,45 +13,87 @@
           </svg>
         </button>
       </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+      <div class="flex flex-1 mt-2.5 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          <%= link_to root_path do %>
+            <%= image_tag "logowhite", class: "h-12" %>
+          <% end %>
         </div>
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <%= link_to "Dashboard", dashboard_path, class: "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            <%= link_to "Users", users_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            <div class="relative ml-3">
-              <div data-action="click->nav-bar#toggleLocationDropdown">
-                <button type="button" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="sales-menu-button" aria-expanded="false" aria-haspopup="true">
-                  Sales
-                </button>
-              </div>
+          <div class="flex mt-2 space-x-4">
 
-              <div data-nav-bar-target="salesLocationsList" class="absolute hidden z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
-                <% Store.all.each_with_index do |location, index| %>
-                  <%= link_to location.name, new_sale_path(location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{index}" %>
-                <% end %>
-              </div>
+            <div class="group">
+              <%= link_to "Dashboard", dashboard_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            </div>
+
+            <div class="group">
+              <%= link_to "Users", users_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            </div>
+
+            <div class="group">
+              <%= link_to "Flavors", flavors_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             </div>
 
             <div class="relative ml-3">
-              <div data-action="click->nav-bar#toggleProdLocationDropdown">
-                <button type="button" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="productions-menu-button" aria-expanded="false" aria-haspopup="true">
-                  Productions
-                </button>
+              <div class="group" data-action="click->nav-bar#toggleLocationDropdown click->nav-bar#activeLink">
+                <%= link_to "Sales", "javascript:void(0)", id: "sales-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
+                    class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
               </div>
 
-              <div data-nav-bar-target="productionsLocationsList" class="absolute hidden z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="productions-menu-button" tabindex="-1">
-                <% Inventory.all.each_with_index do |location, index| %>
-                  <%= link_to location.name, new_production_path(location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "productions-menu-item-#{index}" %>
-                <% end %>
-              </div>
+              <% if @stores.size > 0 %>
+                <div data-nav-bar-target="salesLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
+                  <% @stores.each_with_index do |location, index| %>
+                    <%= link_to location.name, sales_path(location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{index}" %>
+                  <% end %>
+                </div>
+              <% else %>
+                <div data-nav-bar-target="salesLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
+                  <%= link_to "Stores does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{0}" %>
+                </div>
+              <% end %>
             </div>
-            <%= link_to "Transfers", new_transfer_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            <%= link_to "Locations", locations_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            <%= link_to "System Configuration", system_configuration_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"  if current_user.has_role?(:super_admin) %>
-            <%= link_to "Logout", sessions_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", data: { turbo_method: :delete } %>
+
+            <div class="relative ml-3">
+              <div class="group" data-action="click->nav-bar#toggleProdLocationDropdown click->nav-bar#activeLink">
+                <%= link_to "Productions", "javascript:void(0)", id: "productions-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
+                    class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+              </div>
+
+              <% if @inventories.size > 0 %>
+                <div data-nav-bar-target="productionsLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
+                  <% @inventories.each_with_index do |location, index| %>
+                    <%= link_to location.name, productions_path(location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{index}" %>
+                  <% end %>
+                </div>
+              <% else %>
+                <div data-nav-bar-target="productionsLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
+                  <%= link_to "Inventories does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "productions-menu-item-#{0}" %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="group">
+              <%= link_to "Transfers", new_transfer_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            </div>
+
+            <div class="group">
+              <%= link_to "Locations", locations_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            </div>
+
+            <div class="group">
+              <%= link_to "System Configuration", system_configuration_path, data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" if current_user.has_role?(:super_admin) %>
+            </div>
+
+            <div class="group">
+              <%= link_to "Logout", sessions_path, data: { action: 'click->nav-bar#activeLink' },
+                class:"nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", data: { turbo_method: :delete } %>
+            </div>
           </div>
         </div>
       </div>

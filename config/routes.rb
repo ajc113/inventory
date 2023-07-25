@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :sales
+  resources :flavors
   resources :locations
   resources :productions
   resources :transfers

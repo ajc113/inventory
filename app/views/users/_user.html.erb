@@ -1,12 +1,12 @@
-<div id="<%= dom_id user %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Email:</strong>
-    <%= user.email %>
-  </p>
-
-  <% if action_name != "show" %>
+<tr id="<%= dom_id user %>" >
+  <td>
+    <div class="flex">
+      <i class="fas fa-arrows-alt handle mt-1 ml-1 mr-1"></i>
+      <%= user.email %>
+    </div>
+  </td>
+  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
     <%= link_to "Show this user", user, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this user', edit_user_path(user), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+  </td>
+</tr>
