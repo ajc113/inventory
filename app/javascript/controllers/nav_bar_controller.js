@@ -5,6 +5,9 @@ export default class extends Controller {
 
   connect() {
     let currentPath = window.location.pathname;
+    let secondSlashIndex = window.location.pathname.indexOf('/', 1);
+
+    if(secondSlashIndex > 0) { currentPath = currentPath.substring(0, secondSlashIndex) }
 
     document.querySelectorAll('.nav-link').forEach( link => {
       link.parentElement.classList.remove('active-link')
