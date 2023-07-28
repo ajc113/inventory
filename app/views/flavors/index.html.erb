@@ -1,48 +1,57 @@
-<div class="px-4 sm:px-6 lg:px-8">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto flex justify-between items-center">
-      <h1 class="text-base text-xl font-semibold leading-6 text-gray-900">Flavors List</h1>
-      <%= link_to 'New flavor', new_flavor_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<div class="grid grid-cols-6 gap-2 text-left">
+  <div class="px-4 col-span-5 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto flex justify-between items-center">
+        <h1 class="text-base text-xl font-semibold leading-6 text-gray-900">Flavors List</h1>
+        <%= link_to 'New flavor', new_flavor_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+      </div>
     </div>
-  </div>
-  <div class="mt-8 flow-root">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-          <table class="min-w-full sortable divide-y divide-gray-300">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Archived</th>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Sale Locations</th>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Inventory Locations</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
-              <% @flavors.each do |flavor| %>
+    <div class="mt-8 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+            <table class="min-w-full sortable divide-y divide-gray-300">
+              <thead class="bg-gray-50">
                 <tr>
-                  <td> <%= flavor.name %> </td>
-                  <td> <%= flavor.archived %> </td>
-                  <td>
-                    <ul class="list-disc">
-                      <% flavor.locations.select{ |location| location.type == 'Store' }.each do |store_location| %>
-                        <li><%= store_location.name %></li>
-                      <% end %>
-                    </ul>
-                  </td>
-                  <td>
-                    <ul class="list-disc">
-                      <% flavor.locations.select{ |location| location.type == 'Inventory' }.each do |inventory_location| %>
-                        <li><%= inventory_location.name %></li>
-                      <% end %>
-                    </ul>
-                  </td>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Archived</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Sale Locations</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Inventory Locations</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <% @flavors.each do |flavor| %>
+                  <tr>
+                    <td> <%= flavor.name %> </td>
+                    <td> <%= flavor.archived %> </td>
+                    <td>
+                      <ul class="list-disc">
+                        <% flavor.locations.select{ |location| location.type == 'Store' }.each do |store_location| %>
+                          <li><%= store_location.name %></li>
+                        <% end %>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul class="list-disc">
+                        <% flavor.locations.select{ |location| location.type == 'Inventory' }.each do |inventory_location| %>
+                          <li><%= inventory_location.name %></li>
+                        <% end %>
+                      </ul>
+                    </td>
+                    <td class="whitespace-nowrap flex py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                      <%= link_to 'Edit this flavor', edit_flavor_path(flavor), data: { turbo_frame: 'edit-show-flavor-area' }, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+                      <%= button_to "Destroy this flavor", flavor_path(flavor), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <%= turbo_frame_tag 'edit-show-flavor-area', class: "col-span-1 border-l border-gray-200" %>
 </div>
