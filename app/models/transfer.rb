@@ -8,6 +8,10 @@ class Transfer < ApplicationRecord
   belongs_to :to_location, class_name: "Location", foreign_key: 'to_location_id'
   belongs_to :from_location, class_name: "Location", foreign_key: 'from_location_id'
 
+  def self.load_associations
+    includes(:flavor, :to_location, :from_location)
+  end
+
   private
 
   def to_from_locations_type

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ['salesLocationsList', 'productionsLocationsList']
+  static targets = ['salesLocationsList', 'productionsLocationsList', 'transfersLocationsList']
 
   connect() {
     let currentPath = window.location.pathname;
@@ -20,7 +20,7 @@ export default class extends Controller {
     } else if (currentPath == '/productions') {
       document.getElementById('productions-menu-button').parentElement.classList.add('active-link');
     }else if(currentPath == '/transfers') {
-      document.querySelector(`a[href="/transfers/new"]`).parentElement.classList.add('active-link');
+      document.getElementById('transfers-menu-button').parentElement.classList.add('active-link');
     } else {
       document.querySelector(`a[href="${currentPath}"]`).parentElement.classList.add('active-link');
     }
@@ -40,5 +40,9 @@ export default class extends Controller {
 
   toggleProdLocationDropdown() {
     this.productionsLocationsListTarget.classList.toggle('hidden');
+  }
+
+  toggleTransferLocationDropdown() {
+    this.transfersLocationsListTarget.classList.toggle('hidden');
   }
 }

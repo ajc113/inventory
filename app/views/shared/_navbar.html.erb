@@ -75,9 +75,23 @@
               <% end %>
             </div>
 
-            <div class="group">
-              <%= link_to "Transfers", new_transfer_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            <div class="relative ml-3">
+              <div class="group" data-action="click->nav-bar#toggleTransferLocationDropdown click->nav-bar#activeLink">
+                <%= link_to "Transfers", "javascript:void(0)", id: "transfers-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
+                    class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+              </div>
+
+              <% if @inventories.size > 0 %>
+                <div data-nav-bar-target="transfersLocationsList" class="mt-4 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
+                  <% @inventories.each_with_index do |location, index| %>
+                    <%= link_to location.name, transfers_path(from_location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "transfers-menu-item-#{index}" %>
+                  <% end %>
+                </div>
+              <% else %>
+                <div data-nav-bar-target="transfersLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
+                  <%= link_to "Inventories does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "transfers-menu-item-#{0}" %>
+                </div>
+              <% end %>
             </div>
 
             <div class="group">

@@ -1,0 +1,55 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto flex justify-between items-center">
+      <h1 class="text-base text-xl font-semibold leading-6 text-gray-900">Transfers List</h1>
+      <div data-controller="transfers" class="relative ml-3">
+        <div class="group" data-action="click->transfers#toggleNewTransferDropdown">
+          <%= link_to 'New transfer', "javascript:void(0)", id: "new-transfer-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
+            class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+
+          <% if @stores.size > 0 %>
+            <div data-transfers-target="newTransfersLocationList" class="mt-4 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="new-transfer-menu-button" tabindex="-1">
+              <% @stores.each_with_index do |location, index| %>
+                <%= link_to location.name, new_transfer_path(from_location_id: @from_location.id, to_location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "new-transfers-menu-item-#{index}" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div data-transfers-target="newTransfersLocationList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="new-transfer-menu-button" tabindex="-1">
+              <%= link_to "Stores does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "new-transfers-menu-item-#{0}" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <table class="min-w-full sortable divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavor</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Quantity</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">From Location</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">To Location</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @transfers.each do |transfer| %>
+                <tr>
+                  <td> <%= transfer.flavor.name %> </td>
+                  <td> <%= transfer.quantity %> </td>
+                  <td> <%= transfer.from_location.name %> </td>
+                  <td> <%= transfer.to_location.name %> </td>
+                </tr>
+              <% end %>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
