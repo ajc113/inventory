@@ -5,8 +5,8 @@ namespace :dev do
   task prime: :environment do
     # Seed Locations
     locations = ['Inventory', 'Kingston', 'Marshfield']
-    locations.each do |location|
-      Location.find_or_create_by!(name: location)
+    locations.each_with_index do |location, index|
+      Location.find_or_create_by!(name: location, type: index == 0 ? 'Inventory' : 'Store')
     end
 
     # Seed Flavors
