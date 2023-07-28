@@ -19,7 +19,7 @@ class TransfersController < ApplicationController
     @errors = result.meta[:message] unless result.valid?
 
     if result.valid?
-      redirect_to transfers_path, notice: result.meta[:message]
+      redirect_to transfers_path(from_location_id: @from_location.id), notice: result.meta[:message]
     else
       render :new, status: :unprocessable_entity
     end
