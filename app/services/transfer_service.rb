@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransferService < ApplicationService
-  attr_reader :params
+  attr_reader :params, :from_location
 
   def initialize(params)
     @params = params
@@ -9,14 +9,19 @@ class TransferService < ApplicationService
 
   def call
     errors = []
+    location_flavors = from_location.location_flavors
 
     ActiveRecord::Base.transaction do
-      @transfer_record = create_transfer_record
+      location_flavors.each do |location_flavor|
+        flavor_id = location_flavor.flavor_id
+        transfer_quantity = quantity_params["#{flavor_id}_quantity"].to_i
 
-      deduct_quantity_from_location
+        @transfer_record = create_transfer_record(flavor_id, transfer_quantity)
 
-      add_quantity_to_location
+        deduct_quantity_from_location(flavor_id, transfer_quantity)
 
+        add_quantity_to_location(flavor_id, transfer_quantity)
+      end
     rescue StandardError => exception
       errors << exception
       raise ActiveRecord::Rollback
@@ -31,39 +36,35 @@ class TransferService < ApplicationService
 
   private
 
-  def transfer_params
-    params.require(:transfer).permit(:quantity, :flavor_id, :from_location_id, :to_location_id)
+  def quantity_params
+    params.select { |key, value| key.end_with?("_quantity") }
   end
 
-  def create_transfer_record
-    Transfer.create!(transfer_params)
+  def create_transfer_record(flavor_id, quantity)
+    Transfer.create!(quantity:, flavor_id:, to_location:, from_location:)
   end
 
-  def deduct_quantity_from_location
-    location_flavor = from_location.location_flavors.find_by!(flavor_id: flavor.id)
+  def deduct_quantity_from_location(flavor_id, quantity)
+    location_flavor = from_location.location_flavors.find_by!(flavor_id:)
 
-    calculated_quantity = location_flavor.inventory - transfer_params[:quantity].to_i
+    calculated_quantity = location_flavor.inventory - quantity.to_i
 
     location_flavor.update!(inventory: calculated_quantity)
   end
 
-  def add_quantity_to_location
-    location_flavor = to_location.location_flavors.find_by!(flavor_id: flavor.id)
+  def add_quantity_to_location(flavor_id, quantity)
+    location_flavor = to_location.location_flavors.find_by!(flavor_id:)
 
-    calculated_quantity = location_flavor.inventory + transfer_params[:quantity].to_i
+    calculated_quantity = location_flavor.inventory + quantity.to_i
 
     location_flavor.update!(inventory: calculated_quantity)
-  end
-
-  def flavor
-    @flavor ||= Flavor.find(transfer_params[:flavor_id])
   end
 
   def from_location
-    @from_location ||= Location.find(transfer_params[:from_location_id])
+    @from_location ||= Location.find(params[:from_location_id])
   end
 
   def to_location
-    @to_location ||= Location.find(transfer_params[:to_location_id])
+    @to_location ||= Location.find(params[:to_location_id])
   end
 end
