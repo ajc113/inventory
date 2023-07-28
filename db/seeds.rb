@@ -18,3 +18,8 @@ super_admin = User.find_by(email: super_admin_data[:email]) || User.create!(supe
 super_admin_role = Role.find_or_create_by!(name: 'super_admin')
 
 super_admin.add_role(:super_admin) unless super_admin.has_role?(:super_admin)
+
+SystemConfiguration.first_or_create!(
+  alerting_quantity: 10,
+  report_recipients: ['brookeshomemade@gmail.com'],
+)
