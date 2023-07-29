@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to location_url(@location), notice: "Location was successfully created."
+      redirect_to location_path(@location), notice: "Location was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
 
   def update
     if @location.update(location_params)
-      redirect_to location_url(@location), notice: "Location was successfully updated."
+      redirect_to location_path(@location), notice: "Location was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,9 +33,9 @@ class LocationsController < ApplicationController
 
   def destroy
     if @location.destroy
-      redirect_to locations_url, notice: "Location was successfully destroyed."
+      redirect_to locations_path, notice: "Location was successfully destroyed."
     else
-      redirect_to locations_url, alert: @location.errors.full_message
+      redirect_to locations_path, alert: @location.errors.full_message
     end
   end
 
