@@ -30,7 +30,7 @@
 
     <div class="inline col-span-4 flex justify-between">
       <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-      <%= link_to 'Back to transfers', transfers_path(location_id: @from_location.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= link_to 'Back to transfers', transfers_path(from_location_id: @from_location.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
 </div>
