@@ -1,10 +1,18 @@
 <tr id="<%= dom_id user %>" >
   <td>
     <div class="flex">
-      <i class="fas fa-arrows-alt handle mt-1 ml-1 mr-1"></i>
       <%= user.email %>
     </div>
   </td>
+
+  <td>
+    <div class="flex">
+      <% user.roles.each_with_index do |role, index| %>
+        <p style="color: gray;"><%= role.name %> <%= user.roles.size > index + 1 ? "|" : "" %>&nbsp;</p>
+      <% end %>
+    </div>
+  </td>
+
   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
     <%= link_to "Show this user", user, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this user', edit_user_path(user), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>

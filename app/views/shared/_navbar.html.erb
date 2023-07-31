@@ -105,8 +105,8 @@
             </div>
 
             <div class="group">
-              <%= link_to "Logout", sessions_path, data: { action: 'click->nav-bar#activeLink' },
-                class:"nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", data: { turbo_method: :delete } %>
+              <%= link_to "Logout", sessions_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", action: 'click->nav-bar#activeLink' },
+                class:"nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             </div>
           </div>
         </div>
