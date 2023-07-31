@@ -11,11 +11,18 @@ namespace :dev do
 
     # Seed Flavors
     flavors_name = [
-      { name: 'Flavor 1' },
-      { name: 'Flavor 2' },
-      { name: 'Flavor 3' },
-      { name: 'Flavor 4' },
-      { name: 'Flavor 5' }
+      { name: 'Coffee' },
+      { name: 'Cookie Dough' },
+      { name: 'Double Cookie' },
+      { name: 'Black Raspberry' },
+      { name: 'Mint Chip' },
+      { name: 'Black Rasp Oreo' },
+      { name: 'Chocolate' },
+      { name: 'Cookie Dough M&M' },
+      { name: 'Key Lime Pie' },
+      { name: 'Strawberry' },
+      { name: 'Vanilla' },
+      { name: 'Watermelon' },
     ]
     flavors_ids = []
     flavors_name.each do |flavor|
@@ -32,14 +39,31 @@ namespace :dev do
           quantity = rand(1..15)
           inventory = rand(1..15)
 
-          location_flavor = LocationFlavor.new(
-            flavor: flavor,
-            location: location,
-            quantity: quantity,
-            inventory: inventory
-          )
-          location_flavor.save!
+          LocationFlavor.find_or_create_by!(
+            flavor: flavor, location: location
+          ) do |location_flavor|
+            location_flavor.quantity = quantity
+            location_flavor.inventory = inventory
+          end
         end
+      end
+    end
+
+    15.times do |day|
+      10.times do |flavor|
+        Sale.create!(
+          quantity: rand(1..15),
+          flavor_id: flavors_ids.sample,
+          location: Store.all.sample,
+          created_at: day.days.ago
+        )
+
+        Production.create!(
+          quantity: rand(1..15),
+          flavor_id: flavors_ids.sample,
+          location: Inventory.all.sample,
+          created_at: day.days.ago
+        )
       end
     end
 
