@@ -16,6 +16,8 @@ class TransferService < ApplicationService
         flavor_id = location_flavor.flavor_id
         transfer_quantity = quantity_params["#{flavor_id}_quantity"].to_i
 
+        next if transfer_quantity.zero?
+
         @transfer_record = create_transfer_record(flavor_id, transfer_quantity)
 
         deduct_quantity_from_location(flavor_id, transfer_quantity)
