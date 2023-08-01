@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class SalesController < ApplicationController
-  before_action :set_location_flavors
+  before_action :set_sale, only: %i[destroy]
+  before_action :set_location_flavors, except: %i[destroy]
 
   def index
     @sales = @location.sales.includes(:flavor, :location).order_by_date
@@ -22,11 +23,23 @@ class SalesController < ApplicationController
     end
   end
 
+  def destroy
+    if @sale.destroy
+      redirect_to sales_path, notice: "Sales record successfully destroyed"
+    else
+      redirect_to sales_path, alert: @sale.errors.full_message
+    end
+  end
+
   private
 
   def set_location_flavors
     @location = Location.find(params[:location_id])
 
     @flavors = @location.flavors.includes(:location_flavors)
+  end
+
+  def set_sale
+    @sale = Sale.find(params[:id])
   end
 end
