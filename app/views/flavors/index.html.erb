@@ -24,7 +24,7 @@
                 <% @flavors.each do |flavor| %>
                   <tr>
                     <td> <%= flavor.name %> </td>
-                    <td> <%= flavor.archived %> </td>
+                    <td> <%= flavor.archived ? 'Yes' : 'No' %> </td>
                     <td>
                       <ul class="list-disc">
                         <% flavor.locations.select{ |location| location.type == 'Store' }.each do |store_location| %>
@@ -41,7 +41,7 @@
                     </td>
                     <td class="whitespace-nowrap flex py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       <%= link_to 'Edit this flavor', edit_flavor_path(flavor), data: { turbo_frame: 'edit-show-flavor-area' }, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-                      <%= button_to "Destroy this flavor", flavor_path(flavor), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+                      <%= link_to "Show this flavor", flavor_path(flavor), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
                     </td>
                   </tr>
                 <% end %>

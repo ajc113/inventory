@@ -1,0 +1,42 @@
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-2xl font-bold mb-4">Flavor Details</h1>
+
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <p><strong>Name:</strong><span class="ml-80"><%= @flavor.name %></span></p>
+      </div>
+
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <p><strong>Archived:</strong><span class="ml-[295px]"><%= @flavor.archived ? 'Yes' : 'No' %></span></p>
+      </div>
+
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex">
+        <p>
+          <strong>Sales locations:</strong>
+          <span class="ml-[245px]">
+            <% @flavor.store_locations.each_with_index do |store_location, index| %>
+              <p style="color: gray;"><%= store_location.name %> <%= @flavor.store_locations.size > index + 1 ? "|" : "" %>&nbsp;</p>
+            <% end %>
+          </span>
+        </p>
+      </div>
+
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex">
+        <p>
+          <strong>Inventory locations:</strong>
+          <span class="ml-[210px]">
+            <% @flavor.inventory_locations.each_with_index do |inventory_location, index| %>
+              <p style="color: gray;"><%= inventory_location.name %> <%= @flavor.inventory_locations.size > index + 1 ? "|" : "" %>&nbsp;</p>
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="inline flex justify-between">
+      <%= button_to "Destroy this user", flavor_path(@flavor), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
+      <%= link_to 'Back to flavors', flavors_path, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
+    </div>
+  </div>
+</div>
