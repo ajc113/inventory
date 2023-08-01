@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Sale < ApplicationRecord
+  include Sortable
+
   validates :quantity, presence: true
 
   belongs_to :flavor
@@ -12,5 +14,9 @@ class Sale < ApplicationRecord
       .group('locations.name')
       .group_by_week(:created_at)
       .sum(:quantity)
+  end
+
+  def self.load_associations
+    includes(:flavor, :location)
   end
 end

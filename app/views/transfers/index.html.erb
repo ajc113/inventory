@@ -33,6 +33,7 @@
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Quantity</th>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">From Location</th>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">To Location</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Date</th>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
               </tr>
             </thead>
@@ -44,6 +45,7 @@
                   <td> <%= transfer.quantity %> </td>
                   <td> <%= transfer.from_location.name %> </td>
                   <td> <%= transfer.to_location.name %> </td>
+                  <td> <%= l transfer.created_at, format: :datetime %> </td>
                   <td>
                     <%= link_to "Destroy this record", transfer_path(transfer), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "rounded-lg py-1 ml-2 px-2 bg-gray-100" %>
                   </td>
