@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TransfersController < ApplicationController
-  before_action :set_from_location
+  before_action :set_transfer, only: %i[destroy]
+  before_action :set_from_location, except: %i[destroy]
   before_action :set_to_location, only: %i[new create]
 
   def index
@@ -25,6 +26,14 @@ class TransfersController < ApplicationController
     end
   end
 
+  def destroy
+    if @transfer.destroy
+      redirect_to transfers_path, notice: "transfers record successfully destroyed"
+    else
+      redirect_to transfers_path, alert: @transfer.errors.full_message
+    end
+  end
+
   private
 
   def set_from_location
@@ -35,5 +44,9 @@ class TransfersController < ApplicationController
 
   def set_to_location
     @to_location = Location.find(params[:to_location_id])
+  end
+
+  def set_transfer
+    @transfer = Transfer.find(params[:id])
   end
 end

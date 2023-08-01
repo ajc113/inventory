@@ -16,6 +16,7 @@
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavor</th>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Location</th>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Quantity</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
@@ -25,6 +26,9 @@
                   <td> <%= production.flavor.name %> </td>
                   <td> <%= production.location.name %> </td>
                   <td> <%= production.quantity %> </td>
+                  <td>
+                    <%= link_to "Destroy this record", production_path(production), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "rounded-lg py-1 ml-2 px-2 bg-gray-100" %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>

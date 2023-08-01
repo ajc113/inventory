@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class FlavorsController < ApplicationController
-  before_action :set_flavor, only: %i[edit update destroy]
+  before_action :set_flavor, only: %i[edit update show destroy]
+
   def index
     @flavors = Flavor.all.includes(:locations).order_by_name
   end
@@ -29,6 +30,8 @@ class FlavorsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def show; end
 
   def destroy
     if @flavor.destroy

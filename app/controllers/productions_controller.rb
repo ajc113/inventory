@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ProductionsController < ApplicationController
-  before_action :set_location_flavors
+  before_action :set_production, only: %i[destroy]
+  before_action :set_location_flavors, except: %i[destroy]
 
   def index
     @productions = @location.productions.includes(:flavor, :location).order_by_date
@@ -20,11 +21,23 @@ class ProductionsController < ApplicationController
     end
   end
 
+  def destroy
+    if @production.destroy
+      redirect_to productions_path, notice: "Productions record successfully destroyed"
+    else
+      redirect_to productions_path, alert: @production.errors.full_message
+    end
+  end
+
   private
 
   def set_location_flavors
     @location = Location.find(params[:location_id])
 
     @flavors = @location.flavors.includes(:location_flavors)
+  end
+
+  def set_production
+    @production = Production.find(params[:id])
   end
 end

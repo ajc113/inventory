@@ -30,4 +30,12 @@ class Flavor < ApplicationRecord
 
     location_flavor&.inventory.to_i <= system_configuration.alerting_quantity
   end
+
+  def inventory_locations
+    locations.select{ |location| location.type == 'Inventory' }
+  end
+
+  def store_locations
+    locations.select{ |location| location.type == 'Store' }
+  end
 end
