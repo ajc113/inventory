@@ -17,6 +17,8 @@ class ProductionService < ApplicationService
         flavor_id = location_flavor.flavor_id
         flavor_quantity = quantity_params["#{flavor_id}_quantity"].to_i
 
+        next if flavor_quantity.zero?
+
         errors << invalid_quantity_error(location_flavor) if flavor_quantity.negative?
 
         calculated_inventory = location_flavor.inventory + flavor_quantity
