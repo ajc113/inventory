@@ -5,7 +5,7 @@ class SalesController < ApplicationController
   before_action :set_location_flavors, except: %i[destroy]
 
   def index
-    @sales = @location.sales.includes(:flavor, :location).order_by_date
+    @sales = @location.sales.load_associations.order_by_date.order_by_flavor_name
   end
 
   def new
