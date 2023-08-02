@@ -100,6 +100,11 @@
             </div>
 
             <div class="group">
+              <%= link_to "Sales Report", sales_report_path(date: Date.today), data: { action: 'click->nav-bar#activeLink' },
+                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            </div>
+
+            <div class="group">
               <%= link_to "System Configuration", system_configuration_path, data: { action: 'click->nav-bar#activeLink' },
                 class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" if current_user.has_role?(:super_admin) %>
             </div>
