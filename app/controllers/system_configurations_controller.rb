@@ -24,7 +24,7 @@ class SystemConfigurationsController < ApplicationController
   private
 
   def system_configuration_params
-    params.require(:system_configuration).permit(:alerting_quantity, report_recipients: [])
+    params.require(:system_configuration).permit(:alerting_quantity, :send_report_at, report_recipients: [])
   end
 
   def authorize_user

@@ -32,6 +32,7 @@ en:
     formats:
       date: "%d.%m.%Y"
       datetime: "%d.%m.%Y - %I:%M %p"
+      hours_mins: '%H:%M'
 
   activerecord:
     errors:
