@@ -28,6 +28,9 @@
 #       enabled: "ON"
 
 en:
+  date:
+    formats:
+      default: '%B %d, %Y'
   time:
     formats:
       date: "%d.%m.%Y"
