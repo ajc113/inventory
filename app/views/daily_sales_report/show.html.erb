@@ -1,0 +1,147 @@
+<div class="">
+  <div class="sm:flex-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold mb-4">Daily Sales Report</h1>
+    <input type="date" value="<%= Date.today %>" />
+  </div>
+
+  <div class="border p-4 my-2">
+    <h2 class="text-xl font-bold mb-4">All Stores</h2>
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavors</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Starting Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Sales</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">EoD Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Revenue</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Profit</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Vanilla</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">98</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">32</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">66</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$600</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$300</td>
+        </tr>
+        <tr>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Chocolate</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">120</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">55</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">65</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$985</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$493</td>
+        </tr>
+      </tbody>
+        <tr class="font-bold">
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">218</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">87</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">131</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$1585</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$793</td>
+        </tr>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="border p-4 my-2">
+    <h2 class="text-xl font-bold mb-4">Kingston</h2>
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavors</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Starting Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Sales</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">EoD Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Revenue</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Profit</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Vanilla</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">40</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">16</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 bg-red-200">24</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$300</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$150</td>
+        </tr>
+        <tr>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Chocolate</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">60</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">30</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">30</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$537</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$268</td>
+        </tr>
+      </tbody>
+        <tr class="font-bold">
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">100</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">46</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">54</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$837</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$419</td>
+        </tr>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="border p-4 my-2">
+    <h2 class="text-xl font-bold mb-4">Marshfield</h2>
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavors</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Starting Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Sales</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">EoD Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Revenue</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Profit</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Vanilla</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">58</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">16</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">42</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$300</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$150</td>
+        </tr>
+        <tr>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Chocolate</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">60</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">25</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">35</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$448</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$224</td>
+        </tr>
+      </tbody>
+        <tr class="font-bold">
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total Sales</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">118</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">41</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">77</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$748</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$374</td>
+        </tr>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+
+  <% Inventory.all.each do |inventory| %>
+    <div class="border p-4 my-2">
+      <h2 class="text-xl font-bold mb-4"><%= inventory.name %></h2>
+    </div>
+  <% end %>
+</div>
