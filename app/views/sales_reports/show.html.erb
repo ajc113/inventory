@@ -1,56 +1,66 @@
 <div class="p-6">
-  <h1 class="text-2xl font-semibold mb-4">Sales Report for <%= @date.strftime('%B %d, %Y') %></h1>
+  <h1 class="text-2xl font-semibold mb-4">Sales Report</h1>
 
-  <div class="grid grid-cols-6 gap-6">
     <div class="bg-white col-span-2 p-4 shadow rounded">
       <%= form_with url: '/sales_report', method: :get, class: 'filter-form' do |form| %>
-        <div class="mt-2 flex justify-between items-center mb-4">
-          <%= form.label :date, 'Select Date: ' %>
-          <%= form.date_field :date, value: @date %>
-        </div>
+        <div class="flex gap-4">
+          <div class="">
+            <%= form.label :start_date %>
+            <%= form.date_field :start_date, value: @date %>
+          </div>
 
-        <div class="mt-2 flex justify-between items-center mb-4">
-          <%= form.label :store_id, 'Select Location: ' %>
-          <%= form.select :store_id, options_for_select(Store.all.pluck(:name, :id), params[:store_id]), { include_blank: 'Select store' } %>
-        </div>
+          <div class="">
+            <%= form.label :end_date %>
+            <%= form.date_field :end_date, value: @date %>
+          </div>
 
-        <div class="mt-2">
-          <%= form.submit 'Generate Report', class: "mt-2 btn-primary" %>
-        </div>
+          <div class="">
+            <%= form.label :store_id %>
+            <%= form.select :store_id, options_for_select(Store.all.pluck(:name, :id), params[:store_id]), { include_blank: 'Select store' } %>
+          </div>
 
-        <div class="mt-2 flex justify-between items-center mb-4">
-          <%= link_to 'Previous Day', sales_report_path(date: @date.prev_day, store_id: params[:store_id]), class: 'btn-secondary' %>
-          <%= link_to 'Next Day', sales_report_path(date: @date.next_day, store_id: params[:store_id]), class: 'btn-secondary' %>
+          <div class="">
+            <%= form.label :falvor_id %>
+            <%= form.select :falvor_id, options_for_select(Flavor.all.pluck(:name, :id), params[:flavor_id]), { include_blank: 'Select flavor' } %>
+          </div>
+
+          <div class="">
+            <%= form.submit 'Generate Report', class: "rounded-lg py-2.5 px-5 border border-gray-500 text-gray-500 block font-medium" %>
+          </div>
+
+          <div class="">
+            <%= form.submit 'Export CSV', class: "rounded-lg py-2.5 px-5 border border-gray-500 text-gray-500 block font-medium" %>
+          </div>
         </div>
       <% end %>
     </div>
+</div>
 
-    <div class="bg-white col-span-4 p-4 shadow rounded">
-      <table class="w-full border-collapse">
-        <thead>
+<div class="bg-white shadow rounded">
+  <table class="w-full border-collapse">
+    <thead>
+      <tr>
+        <th class="border py-2">Store</th>
+        <th class="border py-2">Flavor</th>
+        <th class="border py-2">Sales</th>
+        <th class="border py-2">Production</th>
+        <th class="border py-2">Transfers</th>
+        <th class="border py-2">Revenue</th>
+        <th class="border py-2">Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sales_data.each do |store_name, flavors| %>
+        <% flavors.each do |flavor_name, data| %>
           <tr>
-            <th class="border px-4 py-2">Store</th>
-            <th class="border px-4 py-2">Flavor</th>
-            <th class="border px-4 py-2">Usage</th>
-            <th class="border px-4 py-2">Starting Inventory</th>
-            <th class="border px-4 py-2">End of Day Inventory</th>
+            <td class="border px-4 py-2"><%= store_name %></td>
+            <td class="border px-4 py-2"><%= flavor_name %></td>
+            <td class="border px-4 py-2"><%= data[:usage] %></td>
+            <td class="border px-4 py-2"><%= data[:starting_inventory] %></td>
+            <td class="border px-4 py-2"><%= data[:end_of_day_inventory] %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @sales_data.each do |store_name, flavors| %>
-            <% flavors.each do |flavor_name, data| %>
-              <tr>
-                <td class="border px-4 py-2"><%= store_name %></td>
-                <td class="border px-4 py-2"><%= flavor_name %></td>
-                <td class="border px-4 py-2"><%= data[:usage] %></td>
-                <td class="border px-4 py-2"><%= data[:starting_inventory] %></td>
-                <td class="border px-4 py-2"><%= data[:end_of_day_inventory] %></td>
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-
-    </div>
-  </div>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
