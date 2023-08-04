@@ -28,8 +28,8 @@
         </div>
 
         <div class="flex items-center p-1">
-          <%= form.submit 'Generate Report', class: "rounded-lg py-2.5 px-2 border border-gray-500 text-gray-500 block font-medium" %>
-          <%= form.submit 'Export CSV', class: "rounded-lg py-2.5 px-2 ml-5 border border-gray-500 text-gray-500 block font-medium" %>
+          <%= form.submit 'Generate Report', name: 'view', class: "rounded-lg py-2.5 px-2 border border-gray-500 text-gray-500 block font-medium" %>
+          <%= form.submit 'Export CSV', name: 'export-csv', data: { turbo: false }, class: "rounded-lg py-2.5 px-2 ml-5 border border-gray-500 text-gray-500 block font-medium" %>
         </div>
       </div>
     <% end %>

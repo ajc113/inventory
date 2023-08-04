@@ -5,8 +5,12 @@ class SalesReportsController < ApplicationController
 
   def show
     result = SalesReports::CustomRangeService.call(params)
-
     @sales_data = result.data
+
+    if params["export-csv"]
+      sales_csv_data = GenerateSalesCsvData.call(@sales_data)
+      send_data sales_csv_data, filename: "sales_report#{@start_date}-#{@end_date}.csv"
+    end
   end
 
   private
