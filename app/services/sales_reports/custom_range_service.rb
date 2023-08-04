@@ -24,7 +24,7 @@ module SalesReports
             transfers_sum = transfers&.sum(&:quantity)
             productions_sum = productions&.sum(&:quantity)
             revenue = flavor.price * sales_sum
-            profit = revenue - (flavor.unict_cost * sales_sum)
+            profit = revenue - (flavor.unit_cost * sales_sum)
 
             sales_data[store.name][flavor.name] = {
               profit:,

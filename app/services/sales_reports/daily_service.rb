@@ -21,7 +21,7 @@ module SalesReports
           end_of_day_inventory = end_of_day_inventory(starting_inventory, sales)
           total_sale = total_sale(starting_inventory, end_of_day_inventory)
           revenue = flavor.price * sales_sum
-          profit = revenue - (flavor.unict_cost * sales_sum)
+          profit = revenue - (flavor.unit_cost * sales_sum)
 
           sales_data[store.name][flavor.name] = {
             profit:,

@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_08_03_205707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "price", default: 0.0
-    t.float "unict_cost", default: 0.0
+    t.float "unit_cost", default: 0.0
   end
 
   create_table "location_flavors", force: :cascade do |t|
