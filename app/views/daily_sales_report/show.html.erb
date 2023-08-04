@@ -19,12 +19,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <% total_profit = 0 %>
-        <% total_revenue = 0 %>
-        <% grand_total_sales = 0 %>
-        <% total_starting_inventory = 0 %>
-        <% total_end_of_day_inventory = 0 %>
-        <% @sales_data.each do |store_name, flavors| %>
+        <% @sales_data[:stores].each do |store_name, flavors| %>
           <% flavors.each do |flavor_name, data| %>
             <tr>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
@@ -34,21 +29,16 @@
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:revenue] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:profit] %></td>
             </tr>
-            <% total_profit = total_profit + data[:profit].to_i %>
-            <% total_revenue = total_revenue + data[:revenue].to_i %>
-            <% grand_total_sales = grand_total_sales + data[:total_sale].to_i %>
-            <% total_starting_inventory = total_starting_inventory + data[:starting_inventory].to_i %>
-            <% total_end_of_day_inventory = total_end_of_day_inventory + data[:end_of_day_inventory].to_i %>
           <% end %>
         <% end %>
       </tbody>
         <tr class="font-bold">
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_starting_inventory %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= grand_total_sales %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_end_of_day_inventory %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_revenue %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_profit %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:starting_inventory] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:total_sales] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:end_of_day_inventory] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data[:total][:revenue] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data[:total][:profit] %></td>
         </tr>
       <tfoot>
       </tfoot>
@@ -56,7 +46,7 @@
   </div>
 
   <div class="border p-4 my-2">
-    <% @sales_data.each do |store_name, flavors| %>
+    <% @sales_data[:stores].each do |store_name, flavors| %>
       <h2 class="text-xl font-bold mb-4"><%= store_name %></h2>
       <table class="min-w-full divide-y divide-gray-300">
         <thead class="bg-gray-50">
@@ -70,11 +60,6 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
-          <% total_profit = 0 %>
-          <% total_revenue = 0 %>
-          <% grand_total_sales = 0 %>
-          <% total_starting_inventory = 0 %>
-          <% total_end_of_day_inventory = 0 %>
           <% flavors.each do |flavor_name, data| %>
             <tr>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
@@ -84,21 +69,16 @@
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:revenue] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:profit] %></td>
             </tr>
-            <% total_profit = total_profit + data[:profit].to_i %>
-            <% total_revenue = total_revenue + data[:revenue].to_i %>
-            <% grand_total_sales = grand_total_sales + data[:total_sale].to_i %>
-            <% total_starting_inventory = total_starting_inventory + data[:starting_inventory].to_i %>
-            <% total_end_of_day_inventory = total_end_of_day_inventory + data[:end_of_day_inventory].to_i %>
           <% end %>
         </tbody>
         <tfoot>
           <tr class="font-bold">
             <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_starting_inventory %></td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= grand_total_sales %></td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_end_of_day_inventory %></td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_revenue %></td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_profit %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:starting_inventory] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:total_sale] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:end_of_day_inventory] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data["#{store_name}_totals"][:revenue] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data["#{store_name}_totals"][:profit] %></td>
           </tr>
         </tfoot>
       </table>
