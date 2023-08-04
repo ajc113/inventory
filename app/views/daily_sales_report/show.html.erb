@@ -19,19 +19,25 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <% total_starting_inventory = 0 %>
+        <% total_profit = 0 %>
+        <% total_revenue = 0 %>
         <% grand_total_sales = 0 %>
+        <% total_starting_inventory = 0 %>
         <% total_end_of_day_inventory = 0 %>
         <% @sales_data.each do |store_name, flavors| %>
           <% flavors.each do |flavor_name, data| %>
             <tr>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:total_sales] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:total_sale] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:profit] %></td>
             </tr>
+            <% total_profit = total_profit + data[:profit].to_i %>
+            <% total_revenue = total_revenue + data[:revenue].to_i %>
+            <% grand_total_sales = grand_total_sales + data[:total_sale].to_i %>
             <% total_starting_inventory = total_starting_inventory + data[:starting_inventory].to_i %>
-            <% grand_total_sales = grand_total_sales + data[:total_sales].to_i %>
             <% total_end_of_day_inventory = total_end_of_day_inventory + data[:end_of_day_inventory].to_i %>
           <% end %>
         <% end %>
@@ -41,8 +47,8 @@
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_starting_inventory %></td>
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= grand_total_sales %></td>
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_end_of_day_inventory %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$0</td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$0</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_revenue %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_profit %></td>
         </tr>
       <tfoot>
       </tfoot>
@@ -64,18 +70,24 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
-          <% total_starting_inventory = 0 %>
+          <% total_profit = 0 %>
+          <% total_revenue = 0 %>
           <% grand_total_sales = 0 %>
+          <% total_starting_inventory = 0 %>
           <% total_end_of_day_inventory = 0 %>
           <% flavors.each do |flavor_name, data| %>
             <tr>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:total_sales] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:total_sale] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:profit] %></td>
             </tr>
+            <% total_profit = total_profit + data[:profit].to_i %>
+            <% total_revenue = total_revenue + data[:revenue].to_i %>
+            <% grand_total_sales = grand_total_sales + data[:total_sale].to_i %>
             <% total_starting_inventory = total_starting_inventory + data[:starting_inventory].to_i %>
-            <% grand_total_sales = grand_total_sales + data[:total_sales].to_i %>
             <% total_end_of_day_inventory = total_end_of_day_inventory + data[:end_of_day_inventory].to_i %>
           <% end %>
         </tbody>
@@ -85,8 +97,8 @@
             <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_starting_inventory %></td>
             <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= grand_total_sales %></td>
             <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= total_end_of_day_inventory %></td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$0</td>
-            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$0</td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_revenue %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= total_profit %></td>
           </tr>
         </tfoot>
       </table>

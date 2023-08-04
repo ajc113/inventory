@@ -14,7 +14,7 @@ module SalesReports
       stores.each do |store|
         sales_data[store.name] = {}
 
-        store.flavors.each do |flavor|
+        store.flavors.order_by_name.each do |flavor|
           if params[:flavor_id].blank? || selected_flavor.id == flavor.id
             sales = store.sales.where(flavor: flavor, created_at: date_range)
             productions = Production.where(flavor: flavor, created_at: date_range)
@@ -23,8 +23,12 @@ module SalesReports
             sales_sum = sales&.sum(&:quantity)
             transfers_sum = transfers&.sum(&:quantity)
             productions_sum = productions&.sum(&:quantity)
+            revenue = flavor.price * sales_sum
+            profit = revenue - (flavor.unict_cost * sales_sum)
 
             sales_data[store.name][flavor.name] = {
+              profit:,
+              revenue:,
               sales_sum:,
               transfers_sum:,
               productions_sum:

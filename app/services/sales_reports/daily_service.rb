@@ -13,14 +13,19 @@ module SalesReports
       stores.each do |store|
         sales_data[store.name] = {}
 
-        store.flavors.each do |flavor|
+        store.flavors.order_by_name.each do |flavor|
           sales = store.sales.where(flavor: flavor, created_at: date.beginning_of_day..date.end_of_day)
+          sales_sum = sales&.sum(&:quantity).to_f
 
           starting_inventory = starting_inventory(store, flavor, sales)
           end_of_day_inventory = end_of_day_inventory(starting_inventory, sales)
           total_sale = total_sale(starting_inventory, end_of_day_inventory)
+          revenue = flavor.price * sales_sum
+          profit = revenue - (flavor.unict_cost * sales_sum)
 
           sales_data[store.name][flavor.name] = {
+            profit:,
+            revenue:,
             total_sale:,
             starting_inventory:,
             end_of_day_inventory:
