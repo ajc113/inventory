@@ -29,12 +29,12 @@
 
       <div class="my-5">
         <%= form.label :price %>
-        <%= form.number_field :price, required: true, min: 0, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.number_field :price, required: true, min: 0, step: 'any', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
       </div>
 
       <div class="my-5">
         <%= form.label :unit_cost %>
-        <%= form.number_field :unit_cost, required: true, min: 0, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.number_field :unit_cost, required: true, min: 0, step: 'any', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
       </div>
 
       <div class="inline">
