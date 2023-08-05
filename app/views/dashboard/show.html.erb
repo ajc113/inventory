@@ -1,6 +1,6 @@
 <div class="px-4 sm:px-6 lg:px-8">
 
-  <%= line_chart @sales_locations_data, xtitle: 'Week Number', ytitle: 'Total Quantity', library: { series: { lineWidth: 3 } } %>
+  <%= column_chart @revenue_data_for_graph, xtitle: 'Date', ytitle: 'Revenue' %>
 
   <div class="mt-4 sm:flex sm:items-center">
     <div class="sm:flex-auto">

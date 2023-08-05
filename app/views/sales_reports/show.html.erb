@@ -53,13 +53,13 @@
           <% @sales_data.each do |store_name, flavors| %>
             <% flavors.each do |flavor_name, data| %>
               <tr>
-                <td class="border px-4 text-center py-2"><%= store_name %></td>
-                <td class="border px-4 text-center py-2"><%= flavor_name %></td>
-                <td class="border px-4 text-center py-2"><%= data[:sales_sum] %></td>
-                <td class="border px-4 text-center py-2"><%= data[:productions_sum] %></td>
-                <td class="border px-4 text-center py-2"><%= data[:transfers_sum] %></td>
-                <td class="border px-4 text-center py-2"><%= data[:revenue] %></td>
-                <td class="border px-4 text-center py-2"><%= data[:profit] %></td>
+                <td class="border px-4 py-2"><%= store_name %></td>
+                <td class="border px-4 py-2"><%= flavor_name %></td>
+                <td class="border px-4 py-2"><%= data[:sales_sum] %></td>
+                <td class="border px-4 py-2"><%= data[:productions_sum] %></td>
+                <td class="border px-4 py-2"><%= data[:transfers_sum] %></td>
+                <td class="border px-4 py-2"><%= currency data[:revenue] %></td>
+                <td class="border px-4 py-2"><%= currency data[:profit] %></td>
               </tr>
             <% end %>
           <% end %>

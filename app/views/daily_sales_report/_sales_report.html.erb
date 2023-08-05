@@ -26,8 +26,8 @@
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:total_sale] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:end_of_day_inventory] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:revenue] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:profit] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:profit] %></td>
             </tr>
           <% end %>
         <% end %>
@@ -37,8 +37,8 @@
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:starting_inventory] %></td>
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:total_sales] %></td>
           <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:end_of_day_inventory] %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data[:total][:revenue] %></td>
-          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data[:total][:profit] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data[:total][:revenue] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data[:total][:profit] %></td>
         </tr>
       <tfoot>
       </tfoot>
@@ -66,8 +66,8 @@
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:total_sale] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:end_of_day_inventory] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:revenue] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:profit] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:profit] %></td>
             </tr>
           <% end %>
         </tbody>
