@@ -4,8 +4,8 @@ module SalesReports
 
     def initialize(params)
       @params = params
-      @start_date = params.fetch(:start_date, Date.today).to_date
-      @end_date = params.fetch(:end_date, Date.today).to_date
+      @start_date = params[:start_date].to_date
+      @end_date = params[:end_date].present? ? params[:end_date].to_date : Date.today
     end
 
     def call

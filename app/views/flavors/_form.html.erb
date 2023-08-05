@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-span-1 py-3">
-      <%= form.number_field :price, required: true, min: 0, class: "block shadow rounded-md ml-[-80px] border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.number_field :price, required: true, min: 0, step: 'any', class: "block shadow rounded-md ml-[-80px] border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="col-span-1 mt-2 max-w-[50px] py-3 text-base">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="col-span-1 py-3">
-      <%= form.number_field :unit_cost, required: true, min: 0, class: "block shadow rounded-md ml-[-80px] border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.number_field :unit_cost, required: true, min: 0, step: 'any', class: "block shadow rounded-md ml-[-80px] border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="inline col-span-5 border-t border-gray-200 flex justify-between">
