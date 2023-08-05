@@ -21,29 +21,12 @@
       <tbody class="divide-y divide-gray-200 bg-white">
         <% @sales_data[:stores].each do |store_name, data| %>
             <tr>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
-                <%= store_name %>
-              </td>
-
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
-                <%= @sales_data["#{store_name}_totals"][:starting_inventory] %>
-              </td>
-
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
-                <%= @sales_data["#{store_name}_totals"][:total_sale] %>
-              </td>
-
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
-                <%= @sales_data["#{store_name}_totals"][:end_of_day_inventory] %>
-              </td>
-
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
-                <%= currency @sales_data["#{store_name}_totals"][:revenue] %>
-              </td>
-
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
-                <%= currency @sales_data["#{store_name}_totals"][:profit] %>
-              </td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= store_name %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:starting_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:total_sale] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data["#{store_name}_totals"][:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data["#{store_name}_totals"][:profit] %></td>
             </tr>
         <% end %>
       </tbody>
