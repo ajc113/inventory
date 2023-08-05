@@ -20,6 +20,21 @@
     </div>
 
     <div class="my-5">
+      <%= form.label :alerting_sale %>
+      <%= form.text_field :alerting_sale, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :alerting_production %>
+      <%= form.text_field :alerting_production, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :alerting_inventory %>
+      <%= form.text_field :alerting_inventory, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
       <%= form.label :send_report_at, 'Report Sending Time' %>
       <%= form.time_field :send_report_at, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>

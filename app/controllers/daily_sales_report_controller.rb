@@ -4,5 +4,6 @@ class DailySalesReportController < ApplicationController
 
     @sales_data = result.data
     @date = params[:date].to_date
+    @system_configuration = SystemConfiguration.first
   end
 end

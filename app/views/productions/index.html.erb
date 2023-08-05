@@ -25,7 +25,7 @@
                   <td> <%= l production.created_at, format: :datetime %> </td>
                   <td> <%= production.flavor.name %> </td>
                   <td> <%= production.location.name %> </td>
-                  <td> <%= production.quantity %> </td>
+                  <td class="<%= production.alerting_production?(@system_configuration) ? 'bg-red-500' : '' %>"> <%= production.quantity %> </td>
                   <td>
                     <%= link_to "Destroy this record", production_path(production), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "rounded-lg py-1 ml-2 px-2 bg-gray-100" %>
                   </td>

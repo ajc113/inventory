@@ -22,7 +22,8 @@ module SalesReports
           starting_inventory: 0,
           end_of_day_inventory: 0
         },
-        stores: {}
+        stores: {},
+        inventories: {}
       }
     end
 
@@ -35,9 +36,26 @@ module SalesReports
         sales_data[:stores][store.name] = store_data
       end
 
+      inventories.each do |inventory|
+        inventory_data = generate_inventory_data(inventory)
+        sales_data[:inventories][inventory.name] = inventory_data
+        append_inventory_totals(inventory, sales_data, inventory_data)
+      end
+
       append_totals(sales_data)
 
       ServiceResponse.new(data: sales_data)
+    end
+
+    def generate_inventory_data(inventory)
+      flavors = inventory.flavors.includes(:location_flavors).order_by_name
+
+      flavors.each_with_object({}) do |flavor, data|
+        productions = inventory.productions.where(flavor: flavor, created_at: date.beginning_of_day..date.end_of_day)
+        productions_sum = productions.sum(:quantity).to_f
+
+        data[flavor.name] = { production_quantity: productions_sum }
+      end
     end
 
     def generate_store_data(store)
@@ -81,6 +99,22 @@ module SalesReports
       store_ids = params[:store_id].presence || Store.pluck(:id)
 
       Store.where(id: store_ids).includes(:sales)
+    end
+
+    def inventories
+      Inventory.all.includes(:productions)
+    end
+
+    def append_inventory_totals(inventory, sales_data, inventory_data)
+      production_quantity = 0
+
+      inventory_data.each_value do |data|
+        production_quantity += data[:production_quantity].to_i
+      end
+
+      sales_data["#{inventory.name}_totals"] = {
+        production_quantity: production_quantity
+      }
     end
 
     def append_store_totals(store, sales_data, store_data)
