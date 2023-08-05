@@ -96,6 +96,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_08_05_080503) do
     t.string "report_recipients", default: [], array: true
     t.datetime "send_report_at"
     t.integer "alerting_sale"
+    t.integer "alerting_daily_sale"
+    t.integer "alerting_daily_inventory"
+    t.integer "alerting_daily_per_store_sale"
+    t.integer "alerting_daily_per_store_inventory"
     t.integer "alerting_production"
   end
 
