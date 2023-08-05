@@ -95,12 +95,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_08_05_080503) do
     t.datetime "updated_at", null: false
     t.string "report_recipients", default: [], array: true
     t.datetime "send_report_at"
-    t.integer "alerting_sale"
-    t.integer "alerting_daily_sale"
-    t.integer "alerting_daily_inventory"
-    t.integer "alerting_daily_per_store_sale"
-    t.integer "alerting_daily_per_store_inventory"
-    t.integer "alerting_production"
+    t.integer "alerting_sale", default: 0
+    t.integer "alerting_inventory", default: 0
+    t.integer "alerting_production", default: 0
   end
 
   create_table "transfer_requests", force: :cascade do |t|

@@ -29,11 +29,11 @@
                 <%= @sales_data["#{store_name}_totals"][:starting_inventory] %>
               </td>
 
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_daily_per_store_sale >= @sales_data["#{store_name}_totals"][:total_sale] ? 'bg-red-500' : '' %>">
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
                 <%= @sales_data["#{store_name}_totals"][:total_sale] %>
               </td>
 
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_daily_per_store_inventory >= @sales_data["#{store_name}_totals"][:end_of_day_inventory] ? 'bg-red-500' : '' %>">
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">
                 <%= @sales_data["#{store_name}_totals"][:end_of_day_inventory] %>
               </td>
 
@@ -79,8 +79,8 @@
             <tr>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_daily_sale >= data[:total_sale] ? 'bg-red-500' : '' %>"><%= data[:total_sale] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_daily_inventory >= data[:end_of_day_inventory] ? 'bg-red-500' : '' %>"><%= data[:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_sale >= data[:total_sale] ? 'bg-red-500' : '' %>"><%= data[:total_sale] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_inventory >= data[:end_of_day_inventory] ? 'bg-red-500' : '' %>"><%= data[:end_of_day_inventory] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:revenue] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:profit] %></td>
             </tr>
@@ -119,8 +119,8 @@
             <tr>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_daily_sale >= data[:total_sale] ? 'bg-red-500' : '' %>"><%= data[:total_sale] %></td>
-              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_daily_inventory >= data[:end_of_day_inventory] ? 'bg-red-500' : '' %>"><%= data[:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_sale >= data[:total_sale] ? 'bg-red-500' : '' %>"><%= data[:total_sale] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_inventory >= data[:end_of_day_inventory] ? 'bg-red-500' : '' %>"><%= data[:end_of_day_inventory] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:revenue] %></td>
               <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:profit] %></td>
             </tr>
