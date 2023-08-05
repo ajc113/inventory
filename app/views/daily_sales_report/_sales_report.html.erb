@@ -142,7 +142,34 @@
 
   <% Inventory.all.each do |inventory| %>
     <div class="border p-4 my-2">
-      <h2 class="text-xl font-bold mb-4"><%= inventory.name %></h2>
+      <% @sales_data[:inventories].each do |inventory_name, flavors| %>
+        <h2 class="text-xl font-bold mb-4">Flavor Productions at: <%= inventory.name %></h2>
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Location</th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavor</th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Productions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <% flavors.each do |flavor_name, data| %>
+              <tr>
+                <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= inventory_name %></td>
+                <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
+                <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_production >= data[:production_quantity] ? 'bg-red-500' : '' %>"><%= data[:production_quantity] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr class="font-bold">
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+              <td></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{inventory_name}_totals"][:production_quantity] %></td>
+            </tr>
+          </tfoot>
+        </table>
+      <% end %>
     </div>
   <% end %>
 </div>
