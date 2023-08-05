@@ -28,10 +28,14 @@
 #       enabled: "ON"
 
 en:
+  date:
+    formats:
+      default: '%B %d, %Y'
   time:
     formats:
       date: "%d.%m.%Y"
       datetime: "%d.%m.%Y - %I:%M %p"
+      hours_mins: '%H:%M'
 
   activerecord:
     errors:

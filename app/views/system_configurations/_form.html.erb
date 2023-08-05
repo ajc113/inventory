@@ -20,6 +20,11 @@
     </div>
 
     <div class="my-5">
+      <%= form.label :send_report_at, 'Report Sending Time' %>
+      <%= form.time_field :send_report_at, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
       <%= form.label :report_recipients %>
       <%= form.text_field :report_recipients, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>

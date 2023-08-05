@@ -11,6 +11,14 @@
         <p><strong>Archived:</strong><span class="ml-[295px]"><%= @flavor.archived ? 'Yes' : 'No' %></span></p>
       </div>
 
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <p><strong>Price:</strong><span class="ml-80"><%= @flavor.price %></span></p>
+      </div>
+
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <p><strong>Unit Cost:</strong><span class="ml-[290px]"><%= @flavor.unit_cost %></span></p>
+      </div>
+
       <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex">
         <p>
           <strong>Sales locations:</strong>
