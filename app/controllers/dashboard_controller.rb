@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   def show
     @locations = Location.all
-    @revenue_data_for_graph = Sale.revenue_data_for_graph
+    @sales_locations_data = Sale.locations_graph_data
     @flavors = Flavor.includes(:location_flavors).order_by_name
   end
 end
