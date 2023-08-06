@@ -27,8 +27,8 @@
                   <tr>
                     <td> <%= flavor.name %> </td>
                     <td> <%= flavor.archived ? 'Yes' : 'No' %> </td>
-                    <td> <%= flavor.price %> </td>
-                    <td> <%= flavor.unit_cost %> </td>
+                    <td> <%= currency(flavor.price, 2) %> </td>
+                    <td> <%= currency(flavor.unit_cost, 1) %> </td>
                     <td>
                       <ul class="list-disc">
                         <% flavor.locations.select{ |location| location.type == 'Store' }.each do |store_location| %>
