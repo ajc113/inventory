@@ -21,12 +21,12 @@
                selected: params[:from_location_id] || Inventory.first.id %>
           </div>
 
-          <div class="flex items-center bg-gray-200 p-1 shadow rounded ml-5">
+          <div class="flex items-center bg-gray-200 p-1 shadow rounded md:ml-5 sm:mb-0">
             <%= form.label :to_location_id, 'To Location ', class: "mr-2 text-left" %>
             <%= form.select :to_location_id, options_for_select(Location.all.pluck(:name, :id), params[:to_location_id]), { include_blank: 'Select location', required: true } %>
           </div>
 
-          <div class="flex items-center p-1 ml-5">
+          <div class="flex items-center md:p-1 md:ml-5">
             <%= form.submit 'New transfer', name: 'view', data: { turbo_frame: '_top' }, class: "rounded-lg py-2.5 px-2 border border-gray-500 bg-blue-600 text-white block font-medium" %>
           </div>
         </div>
