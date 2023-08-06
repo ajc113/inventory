@@ -5,7 +5,7 @@ class TransfersController < ApplicationController
   before_action :set_flavors_locations, only: %i[new create]
 
   def index
-    @transfers = Transfer.load_associations.order_by_date.order_by_flavor_name
+    @pagy, @transfers = pagy(Transfer.load_associations.order_by_date.order_by_flavor_name)
   end
 
   def new

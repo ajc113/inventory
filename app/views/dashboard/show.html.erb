@@ -38,6 +38,9 @@
               <% end %>
             </tbody>
           </table>
+          <div class="m-5 flex place-content-center">
+            <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+          </div>
         </div>
       </div>
     </div>

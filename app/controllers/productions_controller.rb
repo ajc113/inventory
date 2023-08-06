@@ -6,7 +6,7 @@ class ProductionsController < ApplicationController
 
   def index
     @system_configuration = SystemConfiguration.first
-    @productions = @location.productions.load_associations.order_by_date.order_by_flavor_name
+    @pagy, @productions = pagy(@location.productions.load_associations.order_by_date.order_by_flavor_name)
   end
 
   def new; end
