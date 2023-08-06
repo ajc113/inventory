@@ -6,7 +6,7 @@ class SalesController < ApplicationController
 
   def index
     @system_configuration = SystemConfiguration.first
-    @sales = @location.sales.load_associations.order_by_date.order_by_flavor_name
+    @pagy, @sales = pagy(@location.sales.load_associations.order_by_date.order_by_flavor_name)
   end
 
   def new

@@ -6,7 +6,7 @@ class TransfersController < ApplicationController
   before_action :set_to_location, only: %i[new create]
 
   def index
-    @transfers = @from_location.transfers.load_associations.order_by_date.order_by_flavor_name
+    @pagy, @transfers = pagy(@from_location.transfers.load_associations.order_by_date.order_by_flavor_name)
   end
 
   def new
