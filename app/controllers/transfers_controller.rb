@@ -2,11 +2,10 @@
 
 class TransfersController < ApplicationController
   before_action :set_transfer, only: %i[destroy]
-  before_action :set_from_location, except: %i[destroy]
-  before_action :set_to_location, only: %i[new create]
+  before_action :set_flavors_locations, only: %i[new create]
 
   def index
-    @transfers = @from_location.transfers.load_associations.order_by_date.order_by_flavor_name
+    @transfers = Transfer.load_associations.order_by_date.order_by_flavor_name
   end
 
   def new
@@ -20,7 +19,7 @@ class TransfersController < ApplicationController
     @errors = result.meta[:message] unless result.valid?
 
     if result.valid?
-      redirect_to transfers_path(from_location_id: @from_location.id), notice: result.meta[:message]
+      redirect_to transfers_path, notice: result.meta[:message]
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,14 +35,14 @@ class TransfersController < ApplicationController
 
   private
 
-  def set_from_location
+  def set_flavors_locations
+    @to_location = Location.find(params[:to_location_id])
     @from_location = Location.find(params[:from_location_id])
 
-    @flavors = @from_location.flavors
-  end
+    message = 'Transfer can only take place between different locations'
+    return redirect_back(fallback_location: transfers_path, alert: message) if @from_location.id == @to_location.id
 
-  def set_to_location
-    @to_location = Location.find(params[:to_location_id])
+    @flavors = @from_location.flavors
   end
 
   def set_transfer
