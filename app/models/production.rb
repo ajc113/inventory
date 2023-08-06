@@ -11,4 +11,8 @@ class Production < ApplicationRecord
   def self.load_associations
     includes(:flavor, :location)
   end
+
+  def alerting_production?(system_config)
+    system_config.alerting_production >= quantity
+  end
 end

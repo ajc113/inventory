@@ -25,7 +25,7 @@
                   <td> <%= l sale.created_at, format: :datetime %> </td>
                   <td> <%= sale.flavor.name %> </td>
                   <td> <%= sale.location.name %> </td>
-                  <td> <%= sale.quantity %> </td>
+                  <td class="<%= sale.alerting_sale?(@system_configuration) ? 'bg-red-500' : '' %>"> <%= sale.quantity %> </td>
                   <td>
                     <%= link_to "Destroy this record", sale_path(sale), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "rounded-lg py-1 ml-2 px-2 bg-gray-100" %>
                   </td>
@@ -33,6 +33,11 @@
               <% end %>
             </tbody>
           </table>
+          <div class="border-t border-gray-300">
+            <div class="m-5 flex place-content-center">
+              <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

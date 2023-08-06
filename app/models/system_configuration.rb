@@ -2,6 +2,7 @@
 
 class SystemConfiguration < ApplicationRecord
   PERMITTED_ATTRS = %i[
+    send_report_at
     alerting_quantity
   ].freeze
 

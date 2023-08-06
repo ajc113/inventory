@@ -8,24 +8,54 @@
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-300">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Alerting Quantity</th>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Report Recipients</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
-              <tr>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= @system_configuration.alerting_quantity %></td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                  <% @system_configuration.report_recipients.each do |recipient| %>
-                    <%= recipient %><br>
-                  <% end %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="grid grid-cols-2 text-left">
+            <div class="border p-2 col-span-1">
+              <span class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Alerting Quantity</span>
+            </div>
+            <div class="border p-2 col-span-1">
+              <span class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= @system_configuration.alerting_quantity %></span>
+            </div>
+
+            <div class="border p-2 col-span-1">
+              <span class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Alerting Sale</span>
+            </div>
+            <div class="border p-2 col-span-1">
+              <span class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= @system_configuration.alerting_sale %></span>
+            </div>
+
+            <div class="border p-2 col-span-1">
+              <span class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Alerting Production</span>
+            </div>
+            <div class="border p-2 col-span-1">
+              <span class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= @system_configuration.alerting_production %></span>
+            </div>
+
+            <div class="border p-2 col-span-1">
+              <span class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Alerting Inventory</span>
+            </div>
+            <div class="border p-2 col-span-1">
+              <span class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= @system_configuration.alerting_inventory %></span>
+            </div>
+
+            <div class="border p-2 col-span-1">
+              <span class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Report Sending Time</span>
+            </div>
+            <div class="border p-2 col-span-1">
+              <span class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= l @system_configuration.send_report_at, format: :hours_mins if @system_configuration.send_report_at %></span>
+            </div>
+
+            <div class="border p-2 col-span-1">
+              <span class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Report Sending Time</span>
+            </div>
+
+            <div class="border p-2 col-span-1">
+              <span class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                <% @system_configuration.report_recipients.each do |recipient| %>
+                  <%= recipient %><br>
+                <% end %>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

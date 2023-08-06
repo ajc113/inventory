@@ -19,4 +19,8 @@ class Sale < ApplicationRecord
   def self.load_associations
     includes(:flavor, :location)
   end
+
+  def alerting_sale?(system_config)
+    system_config.alerting_sale >= quantity
+  end
 end

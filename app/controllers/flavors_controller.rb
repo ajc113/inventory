@@ -4,7 +4,7 @@ class FlavorsController < ApplicationController
   before_action :set_flavor, only: %i[edit update show destroy]
 
   def index
-    @flavors = Flavor.all.includes(:locations).order_by_name
+    @pagy, @flavors = pagy(Flavor.includes(:locations).order_by_name)
   end
 
   def new
@@ -50,7 +50,7 @@ class FlavorsController < ApplicationController
   end
 
   def flavor_params
-    params.require(:flavor).permit(:name, :archived)
+    params.require(:flavor).permit(:name, :archived, :price, :unit_cost)
   end
 
   def set_flavor

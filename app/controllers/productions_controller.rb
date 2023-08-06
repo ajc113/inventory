@@ -5,7 +5,8 @@ class ProductionsController < ApplicationController
   before_action :set_location_flavors, except: %i[destroy]
 
   def index
-    @productions = @location.productions.load_associations.order_by_date.order_by_flavor_name
+    @system_configuration = SystemConfiguration.first
+    @pagy, @productions = pagy(@location.productions.load_associations.order_by_date.order_by_flavor_name)
   end
 
   def new; end

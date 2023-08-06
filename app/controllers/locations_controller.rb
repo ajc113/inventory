@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[ show edit update destroy ]
 
   def index
-    @locations = Location.all
+    @pagy, @locations = pagy(Location.all)
   end
 
   def show; end

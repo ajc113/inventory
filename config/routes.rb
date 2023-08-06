@@ -15,5 +15,9 @@ Rails.application.routes.draw do
   resources :transfers
   resource :system_configuration, only: %i[show edit update]
 
+  resource :sales_report, only: %i[show] do
+    get :daily, on: :collection, controller: :daily_sales_report, action: :show
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 end

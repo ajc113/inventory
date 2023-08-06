@@ -1,0 +1,159 @@
+<div data-controller="daily-sales-reports" data-daily-sales-reports-url-value="<%= daily_sales_report_path %>">
+  <div class="sm:flex-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold mb-4">Full Day Activity Report for <%= @date.strftime('%B %d, %Y') %></h1>
+    <input type="date" value="<%= @date %>" data-action="change->daily-sales-reports#updateReportData" />
+  </div>
+
+  <div class="border p-4 my-2">
+    <h2 class="text-xl font-bold mb-4">Report at a Glance</h2>
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Location</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Starting Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Sales</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">EoD Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Revenue</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Profit</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <% @sales_data[:stores].each do |store_name, data| %>
+            <tr>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= store_name %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:starting_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:total_sale] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data["#{store_name}_totals"][:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data["#{store_name}_totals"][:profit] %></td>
+            </tr>
+        <% end %>
+      </tbody>
+        <tr class="font-bold">
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:starting_inventory] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:total_sales] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:end_of_day_inventory] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data[:total][:revenue] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data[:total][:profit] %></td>
+        </tr>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+  <div class="border p-4 my-2">
+    <h2 class="text-xl font-bold mb-4">Flavor Breakdown for All Stores</h2>
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavors</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Starting Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Sales</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">EoD Inventory</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Revenue</th>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Profit</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <% @sales_data[:stores].each do |store_name, flavors| %>
+          <% flavors.each do |flavor_name, data| %>
+            <tr>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_sale >= data[:total_sale] ? 'bg-red-500' : '' %>"><%= data[:total_sale] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_inventory >= data[:end_of_day_inventory] ? 'bg-red-500' : '' %>"><%= data[:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:profit] %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+        <tr class="font-bold">
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:starting_inventory] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:total_sales] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data[:total][:end_of_day_inventory] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data[:total][:revenue] %></td>
+          <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency @sales_data[:total][:profit] %></td>
+        </tr>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="border p-4 my-2">
+    <% @sales_data[:stores].each do |store_name, flavors| %>
+      <h2 class="text-xl font-bold mb-4">Flavor Breakdown for: <%= store_name %></h2>
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavors</th>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Starting Inventory</th>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Sales</th>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">EoD Inventory</th>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Revenue</th>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Profit</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-white">
+          <% flavors.each do |flavor_name, data| %>
+            <tr>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= data[:starting_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_sale >= data[:total_sale] ? 'bg-red-500' : '' %>"><%= data[:total_sale] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_inventory >= data[:end_of_day_inventory] ? 'bg-red-500' : '' %>"><%= data[:end_of_day_inventory] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:revenue] %></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= currency data[:profit] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr class="font-bold">
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:starting_inventory] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:total_sale] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{store_name}_totals"][:end_of_day_inventory] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data["#{store_name}_totals"][:revenue] %></td>
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">$<%= @sales_data["#{store_name}_totals"][:profit] %></td>
+          </tr>
+        </tfoot>
+      </table>
+    <% end %>
+  </div>
+
+  <% Inventory.all.each do |inventory| %>
+    <div class="border p-4 my-2">
+      <% @sales_data[:inventories].each do |inventory_name, flavors| %>
+        <h2 class="text-xl font-bold mb-4">Productions at: <%= inventory.name %></h2>
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Location</th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Flavor</th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Total Productions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <% flavors.each do |flavor_name, data| %>
+              <% next if data[:production_quantity].zero? %>
+              <tr>
+                <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= inventory_name %></td>
+                <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= flavor_name %></td>
+                <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6 <%= @system_configuration.alerting_production >= data[:production_quantity] ? 'bg-red-500' : '' %>"><%= data[:production_quantity] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr class="font-bold">
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6">Total</td>
+              <td></td>
+              <td class="py-3.5 pl-4 pr-3 text-left text-sm sm:pl-6"><%= @sales_data["#{inventory_name}_totals"][:production_quantity] %></td>
+            </tr>
+          </tfoot>
+        </table>
+      <% end %>
+    </div>
+  <% end %>
+</div>

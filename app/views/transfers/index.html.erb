@@ -1,27 +1,39 @@
+<% if flash[:alert].present? %>
+  <div class="text-red-500">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <div class="px-4 sm:px-6 lg:px-8">
   <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto flex justify-between items-center">
+    <div class="w-full sm:w-1/2 flex items-center">
       <h1 class="text-base text-xl font-semibold leading-6 text-gray-900">Transfers List</h1>
-      <div data-controller="transfers" class="relative ml-3">
-        <div class="group" data-action="click->transfers#toggleNewTransferDropdown">
-          <%= link_to 'New transfer', "javascript:void(0)", id: "new-transfer-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
-            class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    </div>
 
-          <% if @stores.size > 0 %>
-            <div data-transfers-target="newTransfersLocationList" class="mt-4 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="new-transfer-menu-button" tabindex="-1">
-              <% @stores.each_with_index do |location, index| %>
-                <%= link_to location.name, new_transfer_path(from_location_id: @from_location.id, to_location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "new-transfers-menu-item-#{index}" %>
-              <% end %>
-            </div>
-          <% else %>
-            <div data-transfers-target="newTransfersLocationList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="new-transfer-menu-button" tabindex="-1">
-              <%= link_to "Stores does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "new-transfers-menu-item-#{0}" %>
-            </div>
-          <% end %>
+    <div class="w-full sm:w-1/2 sm:text-right mt-3 sm:mt-0">
+      <%= form_with url: '/transfers/new', method: :get, class: 'filter-form' do |form| %>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center bg-white mt-5 p-3 shadow rounded">
+          <div class="flex items-center bg-gray-200 p-1 shadow rounded mb-2 sm:mb-0">
+            <%= form.label :from_location_id, 'From Location ', class: "mr-2 text-left" %>
+            <%= form.select :from_location_id,
+               options_for_select(Location.all.pluck(:name, :id), params[:from_location_id] || Inventory.first.id),
+               { required: true },
+               selected: params[:from_location_id] || Inventory.first.id %>
+          </div>
+
+          <div class="flex items-center bg-gray-200 p-1 shadow rounded ml-5">
+            <%= form.label :to_location_id, 'To Location ', class: "mr-2 text-left" %>
+            <%= form.select :to_location_id, options_for_select(Location.all.pluck(:name, :id), params[:to_location_id]), { include_blank: 'Select location', required: true } %>
+          </div>
+
+          <div class="flex items-center p-1 ml-5">
+            <%= form.submit 'New transfer', name: 'view', data: { turbo_frame: '_top' }, class: "rounded-lg py-2.5 px-2 border border-gray-500 bg-blue-600 text-white block font-medium" %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
+
   <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -54,6 +66,11 @@
             </tbody>
 
           </table>
+          <div class="border-t border-gray-300">
+            <div class="m-5 flex place-content-center">
+              <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

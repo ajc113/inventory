@@ -15,6 +15,8 @@
                 <tr>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Archived</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Price</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Unit Cost</th>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Sale Locations</th>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Inventory Locations</th>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
@@ -25,6 +27,8 @@
                   <tr>
                     <td> <%= flavor.name %> </td>
                     <td> <%= flavor.archived ? 'Yes' : 'No' %> </td>
+                    <td> <%= flavor.price %> </td>
+                    <td> <%= flavor.unit_cost %> </td>
                     <td>
                       <ul class="list-disc">
                         <% flavor.locations.select{ |location| location.type == 'Store' }.each do |store_location| %>
@@ -47,6 +51,11 @@
                 <% end %>
               </tbody>
             </table>
+            <div class="border-t border-gray-300">
+              <div class="m-5 flex place-content-center">
+                <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,76 @@
+<% if flash[:alert].present? %>
+  <div class="text-red-500">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<div class="p-6">
+  <div class="flex justify-between">
+    <h1 class="text-2xl font-semibold mt-4">Sales Report</h1>
+    <%= link_to 'View Daily', daily_sales_report_path(date: Date.today), class: "text-blue-600 underline font-medium cursor-pointer" %>
+  </div>
+
+  <div class="bg-white mt-5 p-3 shadow rounded">
+    <%= form_with url: '/sales_report', method: :get, class: 'filter-form' do |form| %>
+      <div class="grid grid-cols-5 gap-4 mb-4">
+        <div class="flex items-center bg-gray-200 p-1 shadow rounded">
+          <%= form.label :start_date, 'Start Date ', class: "mr-2" %>
+          <%= form.date_field :start_date, required: true, value: @start_date %>
+        </div>
+
+        <div class="flex items-center bg-gray-200 p-1 shadow rounded">
+          <%= form.label :end_date, 'End Date ', class: "mr-2" %>
+          <%= form.date_field :end_date, value: @end_date %>
+        </div>
+
+        <div class="flex items-center bg-gray-200 p-1 shadow rounded">
+          <%= form.label :store_id, 'Store ', class: "mr-2" %>
+          <%= form.select :store_id, options_for_select(Store.all.pluck(:name, :id), params[:store_id]), { include_blank: 'Select store' } %>
+        </div>
+
+        <div class="flex items-center bg-gray-200 p-1 shadow rounded">
+          <%= form.label :flavor_id, 'Flavor ', class: "mr-2" %>
+          <%= form.select :flavor_id, options_for_select(Flavor.all.pluck(:name, :id), params[:flavor_id]), { include_blank: 'Select flavor' }, { class: 'max-w-[196px]' } %>
+        </div>
+
+        <div class="flex items-center p-1">
+          <%= form.submit 'Generate Report', name: 'view', data: { turbo_frame: '_top' }, class: "rounded-lg py-2.5 px-2 border border-gray-500 bg-blue-600 text-white block font-medium" %>
+          <%= form.submit 'Export CSV', name: 'export-csv', data: { turbo: false }, class: "rounded-lg py-2.5 px-2 ml-5 border border-gray-500 text-gray-500 block font-medium" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="grid grid-cols-6 gap-6">
+    <div class="bg-white col-span-6 p-4 shadow rounded">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="border py-2">Store</th>
+            <th class="border py-2">Flavor</th>
+            <th class="border py-2">Sales</th>
+            <th class="border py-2">Production</th>
+            <th class="border py-2">Transfers</th>
+            <th class="border py-2">Revenue</th>
+            <th class="border py-2">Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sales_data.each do |store_name, flavors| %>
+            <% flavors.each do |flavor_name, data| %>
+              <tr>
+                <td class="border px-4 py-2"><%= store_name %></td>
+                <td class="border px-4 py-2"><%= flavor_name %></td>
+                <td class="border px-4 py-2"><%= data[:sales_sum] %></td>
+                <td class="border px-4 py-2"><%= data[:productions_sum] %></td>
+                <td class="border px-4 py-2"><%= data[:transfers_sum] %></td>
+                <td class="border px-4 py-2"><%= currency data[:revenue] %></td>
+                <td class="border px-4 py-2"><%= currency data[:profit] %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
