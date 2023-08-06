@@ -1,117 +1,116 @@
-<nav class="bg-gray-800">
-  <div data-controller="nav-bar" class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-        <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      <div class="flex flex-1 mt-2.5 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-shrink-0 items-center">
-          <%= link_to root_path do %>
-            <%= image_tag "logowhite.png", class: "h-12" %>
-          <% end %>
+<nav data-controller="nav-bar" class="border-gray-200 px-2 mt-5 mb-10">
+  <div class="container mx-auto flex flex-wrap items-center justify-between">
+    <%= link_to root_path, class: 'flex' do %>
+      <%= image_tag "logodark2.png", class: "h-12 self-center whitespace-nowrap" %>
+    <% end %>
+    <div class="flex md:order-2">
+      <button data-collapse-toggle="mobile-menu-3" type="button" class="md:hidden text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg inline-flex items-center justify-center" aria-controls="mobile-menu-3" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+      <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+  </div>
+  <div class="hidden md:flex justify-between items-center w-full md:w-auto md:order-1" id="mobile-menu-3">
+    <ul class="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium">
+      <li>
+        <div class="group">
+          <%= link_to "Dashboard", dashboard_path, data: { action: 'click->nav-bar#activeLink' },
+              class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" %>
         </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex mt-2 space-x-4">
+      </li>
 
-            <div class="group">
-              <%= link_to "Dashboard", dashboard_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            </div>
+      <li>
+        <div class="group">
+          <%= link_to "Users", users_path, data: { action: 'click->nav-bar#activeLink' },
+              class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" %>
+        </div>
+      </li>
 
-            <div class="group">
-              <%= link_to "Users", users_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            </div>
+      <li>
+        <div class="group">
+          <%= link_to "Flavors", flavors_path, data: { action: 'click->nav-bar#activeLink' },
+              class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" %>
+        </div>
+      </li>
 
-            <div class="group">
-              <%= link_to "Flavors", flavors_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            </div>
+      <li>
+        <div class="group">
+          <%= link_to "Transfers", transfers_path, data: { action: 'click->nav-bar#activeLink' }, id: 'transfers-link',
+            class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" %>
+        </div>
+      </li>
 
-            <div class="relative ml-3">
-              <div class="group" data-action="click->nav-bar#toggleLocationDropdown click->nav-bar#activeLink">
-                <%= link_to "Sales", "javascript:void(0)", id: "sales-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
-                    class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-              </div>
+      <li>
+        <div class="group">
+          <%= link_to "Locations", locations_path, data: { action: 'click->nav-bar#activeLink' },
+              class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" %>
+        </div>
+      </li>
 
+      <li>
+        <div class="group">
+          <%= link_to "Sales Report", sales_report_path(start_date: Date.today, end_date: Date.today), data: { action: 'click->nav-bar#activeLink' }, id: 'sales-report-link',
+            class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" %>
+        </div>
+      </li>
+
+      <li>
+        <div class="group">
+          <%= link_to "System Configuration", system_configuration_path, data: { action: 'click->nav-bar#activeLink' },
+              class: "!p-2.5 group-[.active-link]:bg-blue-700 text-gray-700 group-[.active-link]md:bg-transparent group-[.active-link]:text-white block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0 rounded" if current_user.has_role?(:super_admin) %>
+        </div>
+      </li>
+
+      <li>
+        <div @click.away="open = false" class="relative group" x-data="{ open: false }">
+          <button @click="open = !open" id="sales-menu-button" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left group-[.active-link]:text-white group-[.active-link]:bg-blue-700 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Sales</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute z-10 left-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
               <% if @stores.size > 0 %>
-                <div data-nav-bar-target="salesLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
-                  <% @stores.each_with_index do |location, index| %>
-                    <%= link_to location.name, sales_path(location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{index}" %>
-                  <% end %>
-                </div>
+                <% @stores.each_with_index do |location, index| %>
+                  <%= link_to location.name, sales_path(location_id: location.id), class: "block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" %>
+                <% end %>
               <% else %>
-                <div data-nav-bar-target="salesLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
-                  <%= link_to "Stores does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{0}" %>
-                </div>
+                <%= link_to "Stores does not exists", "javascript:void(0)", class: "block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" %>
               <% end %>
-            </div>
-
-            <div class="relative ml-3">
-              <div class="group" data-action="click->nav-bar#toggleProdLocationDropdown click->nav-bar#activeLink">
-                <%= link_to "Productions", "javascript:void(0)", id: "productions-menu-button", "aria-expanded": "false", "aria-haspopup": "true",
-                    class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-              </div>
-
-              <% if @inventories.size > 0 %>
-                <div data-nav-bar-target="productionsLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
-                  <% @inventories.each_with_index do |location, index| %>
-                    <%= link_to location.name, productions_path(location_id: location.id), class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "sales-menu-item-#{index}" %>
-                  <% end %>
-                </div>
-              <% else %>
-                <div data-nav-bar-target="productionsLocationsList" class="mt-2 absolute hidden z-10 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="sales-menu-button" tabindex="-1">
-                  <%= link_to "Inventories does not exists", "javascript:void(0)", class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id: "productions-menu-item-#{0}" %>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="group">
-              <%= link_to "Transfers", transfers_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            </div>
-
-            <div class="group">
-              <%= link_to "Locations", locations_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            </div>
-
-            <div class="group">
-              <%= link_to "Sales Report", sales_report_path(start_date: Date.today, end_date: Date.today), data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
-            </div>
-
-            <div class="group">
-              <%= link_to "System Configuration", system_configuration_path, data: { action: 'click->nav-bar#activeLink' },
-                class: "nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" if current_user.has_role?(:super_admin) %>
-            </div>
-
-            <div class="group">
-              <%= link_to "Logout", sessions_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", action: 'click->nav-bar#activeLink' },
-                class:"nav-link group-[.active-link]:bg-gray-900 text-gray-300 group-[.active-link]:text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </li>
 
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" id="mobile-menu">
-    <div class="space-y-1 px-2 pb-3 pt-2">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <%= link_to "Dashboard", dashboard_path, class: "bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" %>
-      <%= link_to "Users", users_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" %>
-      <%= link_to "Logout", sessions_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium", data: { turbo_method: :delete } %>
-    </div>
+      <li>
+        <div @click.away="open = false" class="relative group" x-data="{ open: false }">
+          <button @click="open = !open" id="productions-menu-button" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left group-[.active-link]:text-white group-[.active-link]:bg-blue-700 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Productions</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute z-10 left-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+              <% if @inventories.size > 0 %>
+                <% @inventories.each_with_index do |location, index| %>
+                  <%= link_to location.name, productions_path(location_id: location.id), class: "block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" %>
+                <% end %>
+              <% else %>
+                <%= link_to "Inventories does not exists", "javascript:void(0)", class: "block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="group">
+          <%= link_to "Logout", sessions_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", action: 'click->nav-bar#activeLink' },
+              class: "!p-2.5 text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0" %>
+        </div>
+      </li>
+    </ul>
+  </div>
   </div>
 </nav>
+
+<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>

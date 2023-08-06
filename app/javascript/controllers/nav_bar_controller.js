@@ -20,8 +20,11 @@ export default class extends Controller {
     } else if (currentPath == '/productions') {
       document.getElementById('productions-menu-button').parentElement.classList.add('active-link');
     }else if(currentPath == '/transfers') {
-      document.getElementById('transfers-menu-button').parentElement.classList.add('active-link');
-    } else {
+      document.getElementById('transfers-link').parentElement.classList.add('active-link');
+    } else if (currentPath == '/sales_report') {
+      document.getElementById('sales-report-link').parentElement.classList.add('active-link');
+    }
+    else {
       document.querySelector(`a[href="${currentPath}"]`).parentElement.classList.add('active-link');
     }
   }
