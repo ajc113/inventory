@@ -39,11 +39,10 @@ class TransfersController < ApplicationController
     @to_location = Location.find(params[:to_location_id])
     @from_location = Location.find(params[:from_location_id])
 
-    @flavors = @from_location.flavors
-  end
+    message = 'Transfer can only take place between different locations'
+    return redirect_back(fallback_location: transfers_path, alert: message) if @from_location.id == @to_location.id
 
-  def set_to_location
-    @to_location = Location.find(params[:to_location_id])
+    @flavors = @from_location.flavors
   end
 
   def set_transfer

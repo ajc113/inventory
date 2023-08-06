@@ -1,3 +1,9 @@
+<% if flash[:alert].present? %>
+  <div class="text-red-500">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <div class="px-4 sm:px-6 lg:px-8">
   <div class="sm:flex sm:items-center">
     <div class="w-full sm:w-1/2 flex items-center">
@@ -9,7 +15,10 @@
         <div class="flex flex-col sm:flex-row items-start sm:items-center bg-white mt-5 p-3 shadow rounded">
           <div class="flex items-center bg-gray-200 p-1 shadow rounded mb-2 sm:mb-0">
             <%= form.label :from_location_id, 'From Location ', class: "mr-2 text-left" %>
-            <%= form.select :from_location_id, options_for_select(Location.all.pluck(:name, :id), params[:from_location_id] || Inventory.first.id), { include_blank: Inventory.first.name, required: true } %>
+            <%= form.select :from_location_id,
+               options_for_select(Location.all.pluck(:name, :id), params[:from_location_id] || Inventory.first.id),
+               { required: true },
+               selected: params[:from_location_id] || Inventory.first.id %>
           </div>
 
           <div class="flex items-center bg-gray-200 p-1 shadow rounded ml-5">
