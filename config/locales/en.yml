@@ -44,7 +44,3 @@ en:
           attributes:
             base:
               must_be_singleton: 'Cannot create multiple records'
-        transfer:
-          attributes:
-            base:
-              valid_location_type: 'You can only transfer from inventory to store'
