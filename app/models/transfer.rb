@@ -4,7 +4,6 @@ class Transfer < ApplicationRecord
   include Sortable
 
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validate :to_from_locations_type
 
   belongs_to :flavor
   belongs_to :to_location, class_name: "Location", foreign_key: 'to_location_id'
@@ -12,11 +11,5 @@ class Transfer < ApplicationRecord
 
   def self.load_associations
     includes(:flavor, :to_location, :from_location)
-  end
-
-  private
-
-  def to_from_locations_type
-    errors.add(:base, :valid_location_type) if to_location.is_a?(Inventory) || from_location.is_a?(Store)
   end
 end
