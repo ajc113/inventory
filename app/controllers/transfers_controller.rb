@@ -42,7 +42,7 @@ class TransfersController < ApplicationController
     message = 'Transfer can only take place between different locations'
     return redirect_back(fallback_location: transfers_path, alert: message) if @from_location.id == @to_location.id
 
-    @flavors = @from_location.flavors.active
+    @flavors = @to_location.flavors.active
   end
 
   def set_transfer
