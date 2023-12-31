@@ -26,7 +26,12 @@
     <div class="my-5" data-controller="locations">
       <div class="flex justify-between">
         <%= form.label :flavor_ids, "Select Flavors" %>
-        <div><input type="checkbox" id="select-all-checkbox" class="mr-1 rounded" data-action="change->locations#selectAllOptions" >Select All</div>
+        <div>
+          <label>
+            <input type="checkbox" id="select-all-checkbox" class="mr-1 rounded" data-action="change->locations#selectAllOptions">
+            Select All
+          </label>
+        </div>
       </div>
       <div class="h-72 overflow-y-auto border border-gray-300 rounded p-2">
         <%= collection_check_boxes(:location, :flavor_ids, flavor_options_for_select, :id, :name, { item_wrapper_class: 'my-2' }) do |c_box| %>
