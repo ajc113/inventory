@@ -37,6 +37,16 @@
         <%= form.number_field :unit_cost, required: true, min: 0, step: 'any', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
       </div>
 
+      <div class="my-5">
+        <%= form.label :location_ids %>
+        <%= form.collection_check_boxes :location_ids, Location.all.alphabetical, :id, :name, { item_wrapper_class: 'my-2' } do |c_box| %>
+          <div class="flex items-center my-2">
+            <%= c_box.check_box class: 'mr-2 h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500' %>
+            <%= c_box.label class: 'text-sm' %>
+          </div>
+        <% end %>
+      </div>
+
       <div class="inline">
         <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer", data: { turbo_frame: '_top' } %>
       </div>

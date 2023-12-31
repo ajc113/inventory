@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="h-72 overflow-y-auto border border-gray-300 rounded p-2">
-        <%= collection_check_boxes(:location, :flavor_ids, flavor_options_for_select, :id, :name, { item_wrapper_class: 'my-2' }) do |c_box| %>
+        <%= form.collection_check_boxes(:flavor_ids, flavor_options_for_select, :id, :name, { item_wrapper_class: 'my-2' }) do |c_box| %>
           <div class="flex items-center my-2">
             <%= c_box.check_box(data: { locations_target: "flavorCheckBox" }, class: 'mr-2 h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500') %>
             <%= c_box.label(class: 'text-sm') %>
