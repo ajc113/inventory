@@ -50,7 +50,7 @@ class FlavorsController < ApplicationController
   end
 
   def flavor_params
-    params.require(:flavor).permit(:name, :archived, :price, :unit_cost)
+    params.require(:flavor).permit(:name, :archived, :price, :unit_cost, location_ids: [])
   end
 
   def set_flavor

@@ -37,7 +37,7 @@ class SalesController < ApplicationController
   def set_location_flavors
     @location = Location.find(params[:location_id])
 
-    @flavors = @location.flavors.includes(:location_flavors)
+    @flavors = @location.flavors.active.includes(:location_flavors)
   end
 
   def set_sale

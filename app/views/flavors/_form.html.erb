@@ -44,6 +44,17 @@
       <%= form.number_field :unit_cost, required: true, min: 0, step: 'any', class: "block shadow rounded-md ml-[-80px] border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
+    <div class="col-span-5 py-3">
+      <div class="h-72 overflow-y-auto border border-gray-300 rounded p-2">
+        <%= form.collection_check_boxes(:location_ids, Location.all.alphabetical, :id, :name, { item_wrapper_class: 'my-2' }) do |c_box| %>
+          <div class="flex items-center my-2">
+            <%= c_box.check_box(data: { locations_target: "flavorCheckBox" }, class: 'mr-2 h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500') %>
+            <%= c_box.label(class: 'text-sm') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="inline col-span-5 border-t border-gray-200 flex justify-between">
       <%= form.submit class: "rounded-lg mt-2 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>

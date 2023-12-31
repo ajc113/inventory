@@ -5,11 +5,20 @@
       <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <p><strong>Name:</strong> <span class="ml-80"><%= @location.name %></span></p>
         <p><strong>Type:</strong> <span class="ml-80"><%= @location.type %></span></p>
+        <strong>Flavors:</strong>
+        <ul>
+          <% @location.flavors.active.order_by_name.each do |flavor| %>
+            <li>
+              <%= link_to flavor.name, flavor_path(flavor) %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
 
     <div class="inline flex justify-between">
       <%= button_to "Destroy this location", location_path(@location), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
+    <%= link_to 'Edit this location', edit_location_path(@location), class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
       <%= link_to 'Back to locations', locations_path, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
     </div>
   </div>
