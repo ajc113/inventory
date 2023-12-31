@@ -44,6 +44,7 @@
 
     <div class="inline flex justify-between">
       <%= button_to "Destroy this user", flavor_path(@flavor), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
+      <%= link_to 'Edit this flavor', edit_flavor_path(@flavor), data: { turbo_frame: 'edit-show-flavor-area' }, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
       <%= link_to 'Back to flavors', flavors_path, class: "ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded" %>
     </div>
   </div>
