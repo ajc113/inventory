@@ -9,6 +9,8 @@ class Flavor < ApplicationRecord
   has_many :location_flavors, dependent: :destroy
   has_many :locations, through: :location_flavors
 
+  scope :active, -> { where(archived: false) }
+
   def self.order_by_name
     order(name: :asc)
   end
