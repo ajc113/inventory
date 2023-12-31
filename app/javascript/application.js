@@ -4,4 +4,3 @@ import "controllers";
 import "sortable";
 import "chartkick";
 import "Chart.bundle";
-import "jquery";
