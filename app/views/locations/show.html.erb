@@ -5,6 +5,14 @@
       <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <p><strong>Name:</strong> <span class="ml-80"><%= @location.name %></span></p>
         <p><strong>Type:</strong> <span class="ml-80"><%= @location.type %></span></p>
+        <strong>Flavors:</strong>
+        <ul>
+          <% @location.flavors.active.order_by_name.each do |flavor| %>
+            <li>
+              <%= link_to flavor.name, flavor_path(flavor) %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
 

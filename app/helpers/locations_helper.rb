@@ -1,5 +1,5 @@
 module LocationsHelper
   def flavor_options_for_select
-    Flavor.active.order(name: :asc)
+    Flavor.active.order_by_name
   end
 end
