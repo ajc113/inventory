@@ -1,15 +1,5 @@
+<%= render "shared/errors", errors: @errors %>
 <div class="my-5 grid grid-cols-4 gap-2 text-left">
-  <% if @errors.present? %>
-    <div class="col-span-4 py-3 text-base border-b border-gray-200" style="color: red">
-      <h2><%= @errors.size %> prohibited these transfers from being saved:</h2>
-
-      <ul>
-        <% @errors.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="col-span-2 py-3 text-base border-b border-gray-200">
     <h3 class="text-xl">Flavor Name</h3>
   </div>
@@ -29,7 +19,7 @@
     <%= form.hidden_field :from_location_id, value: @from_location.id %>
 
     <div class="inline col-span-4 flex justify-between">
-      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "Transfer", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
       <%= link_to 'Back to transfers', transfers_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
