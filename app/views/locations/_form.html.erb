@@ -20,7 +20,19 @@
     <%= form.label :type %>
     <%= form.select :type, Location.types.keys, { include_blank: 'Select type', required: true },
         class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-</div>
+  </div>
+
+  <% if location.persisted? %>
+    <div class="my-5" data-controller="select2">
+      <div class="flex justify-between">
+        <%= form.label :flavor_ids, "Select Flavors" %>
+        <div><input type="checkbox" id="select-all-checkbox" class="mr-1 rounded" data-action="change->select2#selectAllOptions" >Select All</div>
+      </div>
+      <%= form.select :flavor_ids, options_for_select(flavor_options_for_select(location), selected: location.flavor_ids), { include_blank: 'Select Flavors' }, 
+      { multiple: true, id: 'select-tag-id', class: "select2 block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" } %>
+    </div>
+  <% end %>
+
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
